@@ -7,20 +7,12 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
-		</div>
+		<header className="bg-warning bg-gradient text-white vh-100">
+            <div className="container d-flex flex-column h-100 px-4 text-center justify-content-center align-items-center">
+                <h1 className="fw-bolder">Welcome to Scrolling Nav</h1>
+                <p className="lead">A functional Bootstrap 5 boilerplate for one page scrolling websites</p>
+                <a className="btn btn-lg btn-light" href="#about">Start scrolling!</a>
+            </div>
+        </header>
 	);
 };
