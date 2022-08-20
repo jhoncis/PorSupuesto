@@ -8,13 +8,13 @@ export const Loging = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const token = sessionStorage.getItem("token");
   console.log("This is your token", token);
   const handleClick =() => {
     actions.loging(email,password);//.then(() =>{
-      //history.push("/")
+      navigate("/")
     //})
   };
 
