@@ -11,12 +11,14 @@ export const Loging = () => {
   const navigate = useNavigate();
 
   const token = sessionStorage.getItem("token");
-  console.log("This is your token", token);
+  console.log("This is your token", store.token);
   const handleClick =() => {
-    actions.loging(email,password);//.then(() =>{
-      navigate("/")
-    //})
+    actions.loging(email,password)//.then(() =>{
+      //navigate("/");
+   //});
   };
+
+  if(store.token && store.token!="" && store.token!=undefined)navigate("/");
 
   const handleLoging = () => {
     const opts = {
@@ -46,8 +48,8 @@ export const Loging = () => {
   return (
     <div className="container px-4 vh-100 text-center mt-5">
       <h1><p className="mt-5 text-center">Loging</p></h1>
-      {token && token!="" && token!=undefined? (
-        "You are logged in with this token" + token
+      {store.token && store.token!="" && store.token!=undefined? (
+        "You are logged in with this token" + store.token
       ):(
         <div>
           <input

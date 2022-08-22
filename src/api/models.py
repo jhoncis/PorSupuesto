@@ -7,14 +7,14 @@ class User(db.Model):
     email = db.Column(db.String(50), unique=True, nullable=False)
     typeuser = db.Column(db.String(1), unique=True,nullable=False)
     letraidentificacion = db.Column(db.String(1), unique=False,nullable=False)
-    indentificacion = db.Column(db.Integer(10), unique=True,nullable=False)
+    indentificacion = db.Column(db.Integer, unique=True, nullable=False)
     name = db.Column(db.String(10), unique=False,nullable=False)
     direccion = db.Column(db.String(120), unique=False,nullable=False)
     region = db.Column(db.String(10), unique=False,nullable=False)
     photo = db.Column(db.String(1000), unique=False,nullable=False)
-    phone = db.Column(db.Integer(15), unique=True,nullable=False)
+    phone = db.Column(db.Integer, unique=True,nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean, unique=False, nullable=False)
 
     def __repr__(self):
         return f'<User {self.email}>'

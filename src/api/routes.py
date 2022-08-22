@@ -25,4 +25,15 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-#@api.route("/register", methods=["POST"])
+@api.route("/register", methods=["POST"])
+def create_register():
+    email = request.json.get("email", None)
+    typeuser = request.json.get("typeuser", None)
+    letraidentificacion = request.json.get("letraidentificacion", None)
+    indentificacion = request.json.get("indentificacion", None)
+    name = request.json.get("name", None)
+    direccion = request.json.get("direccion", None)
+    region = request.json.get("region", None)
+    photo = request.json.get("photo", None)
+    phone = request.json.get("phone", None)
+    password = request.json.get("password", None)
