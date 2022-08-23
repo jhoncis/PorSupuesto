@@ -6,15 +6,10 @@
     background-color: gold;
     margin-top: 3%;
 }
-.signup {
-    text-align: center;
-    padding: 40px 30px;
-  }
-
   
   input{
     cursor: pointer;
-  }
+   }
   
   label{
     cursor: pointer;
@@ -22,17 +17,24 @@
   
   .radiobutton{
     display: flex;
+    flex-basis: auto;
     align-items: center;
     justify-content: center;
+    
+  }
+      
+  h3{
+    text-align: center;
+     }
+  
+  .campos{
+    margin-left: 450px;
+    margin-top: 10px;
+    height: 300px;
+    width: 600px;
   }
   
-  .radiobutton > .form-group{
-    padding-left: 15px;
+  .Boton{
+    margin-top: 20px;
+    text-align: center;
   }
-  
-  .radiobutton{
-    padding-left: 3px;
-  }
-  
-  
-  
