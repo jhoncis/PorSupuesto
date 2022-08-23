@@ -79,7 +79,11 @@
 		"react-dom": "^16.14.0",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0",
+<<<<<<< HEAD
 		"react-select": "^5.4.0",
+=======
+		"react-stars": "^2.2.5",
+>>>>>>> 6c9e03391ed210a1cc3bf6f90bd1df6055cba92b
 		"reactstrap": "^9.1.3"
 	}
 }
