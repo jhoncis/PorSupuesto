@@ -35,7 +35,7 @@ class Proveedores(db.Model):
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #usuario = db.relationship("User")
     personacontacto = db.Column(db.String(120), unique=True, nullable=False)
-    id_categoria = db.Column(db.Integer, (db.ForeignKey('Categoria.id')))
+    id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     solvente = db.Column(db.Boolean(), unique=False, nullable=False)
     descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
     
@@ -52,9 +52,9 @@ class Proveedores(db.Model):
         
 class Ranking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_ranking = db.Column(db.Integer, (db.ForeignKey('Proveedores.id')))
+    id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
     #id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
-    id_categoria = db.Column(db.Integer, (db.ForeignKey('Categoria.id')))
+    id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     calificacion = db.Column(db.Integer, unique=True, nullable = False)
     comentario = db.Column(db.String(300), unique=True, nullable=False)
 
