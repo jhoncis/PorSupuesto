@@ -25,54 +25,23 @@ setup_admin(app)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
-# generate sitemap with all your endpoints
-@app.route('/')
-def sitemap():
-    return generate_sitemap(app)
-
-@app.route('/user', methods=['GET'])
-def handle_hello():
-
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
-
-    return jsonify(response_body), 200
-
-@app.route('/people', methods=['GET'])
-def get_people():
-    #consultar todos los personajes
-    #devolver personas serializadas
-
-    return 'personas consultadas', 200
-
-@app.route('/people/<int:people_id>', methods=['GET'])
-def get_person(people_id):
-    person = ''
-    #consultar id especifico, y guardar es informacion en...
-    #variable pearson
-    #mostrar la informacion del id y si no se encuentra...
-    #responder que no se encuentra registrado
-    if person != None:
-
-        return 'info de persona consultada',200
+@app.route('/user', methods=['GET','POST'])
+def handle_user():
+    if(request.method=='GET'):
+        all_user = User.query.all()
+        return jsonify(
+            [ user.serialize() for user in all_user]
+        ), 200
     else:
-        return 'no se encuentra registrado',404
-
-@app.route('/planets', methods=['GET'])
-def get_planet():
-    # consultar todos los planetas en DB
-    # devolver planetas serializados
-    return "Planetas consultados", 200
-
-@app.route('/planets/<int:planet_id>', methods=['GET'])
-def get_planetid(planet_id):
-    
-    # consultar todos los planeta individual en DB
-    #si no se encuentra devolver alerta de que no se encuentra ese registro
-    # devolver planeta serializado
-    return "informacion de Planeta consultado", 200
-
+        body = request.json
+        if "email" not in body:
+            return 'No existe el usuario!', 400
+        else:
+            new_row = user.new_user(body["email"], body["typeuser"] , body["letraidentificacion"], body["indentificacion"], body["name"], body["direccion"], body["region"], body["photo"], body["phone"], body["password"])
+            if new_row == None:
+                return 'Un error ha ocurrido!', 500
+            else:
+                return jsonify(new_row.serialize()), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

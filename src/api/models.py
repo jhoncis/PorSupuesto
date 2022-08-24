@@ -19,15 +19,57 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.email}>'
 
+
+    @classmethod
+    def new_user(cls, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
+        new_user = cls(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
+        db.session.add(new_user)
+        try:
+            db.session.commit()
+            return new_user
+        except Exception as error:
+            print(error)
+            return None
+
+    def update(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
+        self.email = email
+        self.typeuser = typeuser
+        self.letraidentificacion = letraidentificacion
+        self.indentificacion = indentificacion
+        self.name = name
+        self.direccion = direccion
+        self.region = region
+        self.photo = photo
+        self.phone = phone
+        self.password = password
+        try:
+            db.session.commit()
+            return self
+        except Exception as error:
+            print(error)
+            return False
+
+    def delete(self):
+        db.session.delete(self)
+        try:
+            db.session.commit()
+            return True
+        except Exception as error:
+            print(error)
+            return False
+
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
+            "typeuser": self.typeuser,
+            "letraidentificacion": self.letraidentificacion,
+            "indentificacion": self.indentificacion,
+            "name": self.name,
             "direccion": self.direccion,
             "region": self.region,
-            "phone": self.phone,
             "photo": self.photo,
-            # do not serialize the password, its a security breach
+            "phone": self.phone,
         }
 
 class Proveedores(db.Model):
@@ -72,7 +114,7 @@ class Ranking(db.Model):
 class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     descripcion_categoria = db.Column(db.String(300), unique=True, nullable=False)
-    descrion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
+    descripcion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
 
     
     def __repr__(self):
@@ -84,3 +126,5 @@ class Categoria(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+

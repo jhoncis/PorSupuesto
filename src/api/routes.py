@@ -25,8 +25,8 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-@api.route("/register", methods=["POST"])
-def create_register():
+@api.route("/user",  methods=["POST","GET"])
+def create_user():
     email = request.json.get("email", None)
     typeuser = request.json.get("typeuser", None)
     letraidentificacion = request.json.get("letraidentificacion", None)
@@ -37,3 +37,24 @@ def create_register():
     photo = request.json.get("photo", None)
     phone = request.json.get("phone", None)
     password = request.json.get("password", None)
+
+    return "response", 200
+
+def handle_user():
+    if(request.method=='GET'):
+        all_user = user.query.all()
+        return jsonify(
+            [ user.serialize() for user in all_user]
+        ), 200
+    else:
+        body = request.json
+        if "email" not in body:
+            return 'No existe el usuario!', 400
+        else:
+            new_row = user.new_user(body["email"], body["typeuser"] , body["letraidentificacion"], body["indentificacion"], body["name"], body["direccion"], body["region"], body["photo"], body["phone"], body["password"])
+            if new_row == None:
+                return 'Un error ha ocurrido!', 500
+            else:
+                return jsonify(new_row.serialize()), 200
+
+    
