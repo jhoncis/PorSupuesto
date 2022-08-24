@@ -81,15 +81,50 @@ class Proveedores(db.Model):
     solvente = db.Column(db.Boolean(), unique=False, nullable=False)
     descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
     
-
     def __repr__(self):
         return f'<User {self.email}>'
+
+    @classmethod
+    def new_proveedor(cls, id_usuario, personacontacto, id_categoria, solvente, descripcion):
+        new_proveedor = cls(id_usuario, personacontacto, id_categoria, solvente, descripcion)
+        db.session.add(new_proveedor)
+        try:
+            db.session.commit()
+            return new_proveedor
+        except Exception as error:
+            print(error)
+            return None
+
+    def update(self, id_usuario, personacontacto, id_categoria, solvente, descripcion):
+        self.id_usuario = id_usuario
+        self.personacontacto = personacontacto
+        self.id_categoria = id_categoria
+        self.solvente = solvente
+        self.descripcion = descripcion
+        try:
+            db.session.commit()
+            return self
+        except Exception as error:
+            print(error)
+            return False
+
+    def delete(self):
+        db.session.delete(self)
+        try:
+            db.session.commit()
+            return True
+        except Exception as error:
+            print(error)
+            return False
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "id_usuario": self.id_usuario,
+            "personacontacto": self.personacontacto,
+            "id_categoria": self.id_categoria,
+            "solvente": self.solvente,
+            "descripcion": self.descripcion,
         }
         
 class Ranking(db.Model):
@@ -100,31 +135,92 @@ class Ranking(db.Model):
     calificacion = db.Column(db.Integer, unique=True, nullable = False)
     comentario = db.Column(db.String(300), unique=True, nullable=False)
 
-    
     def __repr__(self):
         return f'<User {self.email}>'
 
-    def serialize(self):
+    @classmethod
+    def new_ranking(cls, id_ranking, id_categoria, calificacion, comentario):
+        new_ranking = cls(id_ranking, id_categoria, calificacion, comentario)
+        db.session.add(new_ranking)
+        try:
+            db.session.commit()
+            return new_ranking
+        except Exception as error:
+            print(error)
+            return None
+
+    def update(self, id_ranking, id_categoria, calificacion, comentario):
+        self.id_ranking = id_ranking
+        self.id_categoria = id_categoria
+        self.calificacion = calificacion
+        self.comentario = comentario
+        try:
+            db.session.commit()
+            return self
+        except Exception as error:
+            print(error)
+            return False
+
+    def delete(self):
+        db.session.delete(self)
+        try:
+            db.session.commit()
+            return True
+        except Exception as error:
+            print(error)
+            return False
+
+    def serialize(self): 
         return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "id_ranking": self.id_ranking,
+            "id_categoria": self.id_categoria,
+            "calificacion": self.calificacion,
+            "comentario": self.comentario,
         }
+
 
 class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     descripcion_categoria = db.Column(db.String(300), unique=True, nullable=False)
     descripcion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
 
-    
     def __repr__(self):
         return f'<User {self.email}>'
 
-    def serialize(self):
+    @classmethod
+    def new_categoria(cls, descripcion_categoria, descripcion_subcategoria):
+        new_categoria = cls(descripcion_categoria, descripcion_subcategoria)
+        db.session.add(new_categoria)
+        try:
+            db.session.commit()
+            return new_categoria
+        except Exception as error:
+            print(error)
+            return None
+
+    def update(self, descripcion_categoria, descripcion_subcategoria):
+        self.descripcion_categoria = descripcion_categoria
+        self.descripcion_subcategoria = descripcion_subcategoria
+        try:
+            db.session.commit()
+            return self
+        except Exception as error:
+            print(error)
+            return False
+
+    def delete(self):
+        db.session.delete(self)
+        try:
+            db.session.commit()
+            return True
+        except Exception as error:
+            print(error)
+            return False
+
+    def serialize(self): 
         return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "descripcion_categoria": self.descripcion_categoria,
+            "descripcion_subcategoria": self.descripcion_subcategoria
         }
 
 
