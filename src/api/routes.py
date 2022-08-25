@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Proveedores, Ranking, Categoria
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -44,25 +44,25 @@ def handle_user():
         phone = request.json.get("phone", None)
         password = request.json.get("password", None)
         if email == None:
-            return 'No existe el usuario!', 400
+            return 'Falta el email!', 400
         if typeuser == None:
-            return 'No existe el usuario!', 400
+            return 'Falta el tipo de Usuario!', 400
         if letraidentificacion == None:
-            return 'No existe el usuario!', 400
+            return 'Falta letra de identificacion!', 400
         if indentificacion == None:
-            return 'No existe el usuario!', 400
+            return 'Falta numero de identificacion!', 400
         if name == None:
-            return 'No existe el usuario!', 400
+            return 'Falta el nombre!', 400
         if direccion == None:
-            return 'No existe el usuario!', 400
+            return 'Falta la direccion!', 400
         if region == None:
-            return 'No existe el usuario!', 400
+            return 'Falta la region!', 400
         if photo == None:
-            return 'No existe el usuario!', 400
+            return 'Falta la foto!', 400
         if phone == None:
-            return 'No existe el usuario!', 400
+            return 'Falta el telefono!', 400
         if password == None:
-            return 'No existe el usuario!', 400
+            return 'Falta la clave!', 400
         else:
             new_row = User.new_user(email, typeuser ,letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
             if new_row == None:
@@ -79,13 +79,16 @@ def handle_proveedor():
         ), 200
     else:
         personacontacto = request.json.get("personacontacto", None)
-        id_categoria = request.json.get("id_categoria", None)
         solvente = request.json.get("solvente", None)
         descripcion = request.json.get("descripcion", None)
+        if personacontacto == None:
+            return 'Falta la persona de Contacto!', 400
         if solvente == None:
             return 'No tiene dato de solvencia!', 400
+        if descripcion == None:
+            return 'Falta la descripcion!', 400
         else:
-            new_row = proveedor.new_proveedor(body["personacontacto"] , body["id_categoria"], body["solvente"], body["descripcion"])
+            new_row = Proveedores.new_proveedor(personacontacto, solvente, descripcion)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:
@@ -99,14 +102,14 @@ def handle_ranking():
             [ ranking.serialize() for ranking in all_ranking]
         ), 200
     else:
-        id_ranking = request.json.get("id_ranking", None)
-        id_categoria = request.json.get("id_categoria", None)
         calificacion = request.json.get("calificacion", None)
         comentario = request.json.get("comentario", None)
         if calificacion == None:
             return 'No esta calificado!', 400
+        if comentario == None:
+            return 'No tiene comentario!', 400
         else:
-            new_row = ranking.new_ranking(body["id_ranking"], body["id_categoria"] , body["calificacion"], body["comentario"])
+            new_row = Ranking.new_ranking(calificacion, comentario)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:
@@ -124,8 +127,10 @@ def handle_categoria():
         descripcion_subcategoria = request.json.get("descripcion_subcategoria", None)
         if descripcion_categoria == None:
             return 'No existe la categoria!', 400
+        if descripcion_subcategoria == None:
+            return 'No existe la subcategoria!', 400
         else:
-            new_row = categoria.new_categoria(body["descripcion_categoria "], body["descripcion_subcategoria"])
+            new_row = Categoria.new_categoria(descripcion_categoria, descripcion_subcategoria)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:

@@ -93,11 +93,15 @@ class Proveedores(User):
     personacontacto = db.Column(db.String(120), unique=True, nullable=False)
     id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     categoria = db.relationship("Categoria")
-    solvente = db.Column(db.Boolean(), unique=False, nullable=False)
+    solvente = db.Column(db.Boolean(), unique=False, nullable=True)
     descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
-    
-    def __repr__(self):
-        return f'<User {self.email}>'
+   
+    def __init__(self, id_usuario, personacontacto, id_categoria, solvente, descripcion):
+        self.id_usuario = id_usuario
+        self.personacontacto = personacontacto
+        self.id_categoria = id_categoria
+        self.solvente = solvente
+        self.descripcion = descripcion
 
     @classmethod
     def new_proveedor(cls, id_usuario, personacontacto, id_categoria, solvente, descripcion):
@@ -150,8 +154,11 @@ class Ranking(db.Model):
     calificacion = db.Column(db.Integer, unique=True, nullable = False)
     comentario = db.Column(db.String(300), unique=True, nullable=False)
 
-    def __repr__(self):
-        return f'<User {self.email}>'
+    def __init__(self, id_ranking, id_categoria, calificacion, comentario):
+        self.id_ranking = id_ranking
+        self.id_categoria = id_categoria
+        self.calificacion = calificacion
+        self.comentario = comentario
 
     @classmethod
     def new_ranking(cls, id_ranking, id_categoria, calificacion, comentario):
@@ -198,6 +205,10 @@ class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     descripcion_categoria = db.Column(db.String(300), unique=True, nullable=False)
     descripcion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
+
+    def __init__(self, descripcion_categoria, descripcion_subcategoria):
+        self.descripcion_categoria = descripcion_categoria
+        self.descripcion_subcategoria = descripcion_subcategoria
 
     @classmethod
     def new_categoria(cls, descripcion_categoria, descripcion_subcategoria):
