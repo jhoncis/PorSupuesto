@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { NavLink } from 'reactstrap';
 
 
 export const Navbar = () => {
@@ -13,12 +14,25 @@ export const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     {!store.token?
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item mx-2"><Link to="/about">About</Link></li>
-                        <li className="nav-item mx-2"><Link to="/service">Service</Link></li>
-						<li className="nav-item mx-2"><Link to="/contact">Contact</Link></li>
-						<li className="nav-item mx-2"><Link to="/loging">Loging</Link></li>
-						<li className="nav-item mx-2"><Link to="/signup">Sign Up</Link></li>
-                    </ul>
+                        <li className="nav-item mx-2">
+                        <a className="nav-link active" href="/about">About</a>
+                      </li>
+                        <li className="nav-item mx-2">
+                        <a className="nav-link active" href="/service">Service</a>
+                        </li>
+						<li className="nav-item mx-2">
+                        <a className="nav-link active" href="/contact">Contact</a>
+                        </li>
+						<li className="nav-item mx-2">
+                            <a className="nav-link active" href="/loging">Loging</a>
+                        </li>
+                            <li className="nav-item mx-2">
+                            <a className="nav-link active" href="/signup">Signup</a>
+                            </li>
+                            <li className="nav-item mx-2">
+                            <a className="nav-link active" href="/home">Home</a>
+                            </li>
+                        </ul>
                     :
                     <button onClick={() => actions.logout()} className="btn btn-primary"> Log out </button>
                     }

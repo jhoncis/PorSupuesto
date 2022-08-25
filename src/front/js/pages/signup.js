@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState } from "react";
 //import { render } from "react-dom";
-import { Button,FormGroup,Label,Input,FormText,Form } from 'reactstrap';
+import { Button,FormGroup,Label,Input,FormText,Form,Col,Row } from 'reactstrap';
 import Select from 'react-select';
 import "../../styles/index.css";
 
@@ -18,7 +18,8 @@ export const Signup = (props) => {
 		correo: ' ',
 		contacto: ' ',
 		clave: ' ',
-		confirma: ' '
+		confirma: ' ',
+		categoria: ' '
 
 
 	});
@@ -60,24 +61,31 @@ export const Signup = (props) => {
 		{label: 'Dependencias Federales', value: 'Aanzoátegui'},
 		{label: 'Dependencias Federales', value: 'Dependencias Federales'},
 		
+
 	]
- 	return (<div className="contenedor px-4 py-4 vh-100">
+	const categoria = [
+		{label: 'Hogar', value: 'Hogar'},
+		{label: 'Oficina', value: 'Oficina'},
+		{label: 'Exteriores', value: 'Exteriores'},
+		
+	]
+	return (<div className="contenedor px-4 py-4 vh-100">
 			<Form className="row"> 
-			<div className="radiobutton">
-				<FormGroup>
-					<Input
-						id="radio1"
-						type="radio"
-						value="1"
-						checked = {opcion== 1 ? true : false }
-						onChange={cambioestadoopcion}
-					/>
-					<Label for="radio1">
-					Persona Natural    
-					</Label>
-				
-				</FormGroup>
+				<div className="radiobutton">
 					<FormGroup>
+						<Input
+							id="radio1"
+							type="radio"
+							value="1"
+							checked = {opcion== 1 ? true : false }
+							onChange={cambioestadoopcion}
+						/>
+						<Label for="radio1">
+							Persona Natural    
+						</Label>
+				
+						</FormGroup>
+						<FormGroup>
 					<Input
 						id="radio2"
 						type="radio"
@@ -103,86 +111,141 @@ export const Signup = (props) => {
 				</FormGroup>
 				</div>
 				<h3>Formulario de registro</h3>
-			<div className="campos">
-				<div className="cold-md-3">		
-						<input
+  	<Row>
+    	<Col md={6}>
+      			<FormGroup>	
+						<Input
 							placeholder="Ingrese su nombre"
 							className="form-control"
 							type="text"
 							name="nombre"
 							onChange={gestionarcambios}
-							></input>
-						
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					
-	 				<input
+						></Input>
+				</FormGroup>
+		</Col>
+		<Col md={6}>
+    			<FormGroup>					
+	 				<Input
 						placeholder="Cédula o R.I.F."
 						className="form-control"
 						type="text"
 						name="identificacion"
 						onChange={gestionarcambios}
-					></input>
-					
-				</div>
-				<p></p>
-				<div className="cold-md-3">
+					></Input>
+			</FormGroup>
+    	</Col>
+	
+			<Col md={6}>
+      			<FormGroup>
 					<Select placeholder="Seleccionar región"
 					options = {regiones}
 					onChange={gestionarcambios}
 					/>
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					<input
+				</FormGroup>
+			</Col>
+			<Col md={6}>
+				<FormGroup>
+					<Input
 					placeholder="Ingrese dirección"
 					className="form-control"
 					type="text"
 					name="direccion"
 					onChange={gestionarcambios}
-					></input>
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					<input
+					></Input>
+					</FormGroup>
+			</Col>
+
+			<Col md={6}>
+					<FormGroup>
+					<Input
 					placeholder="ejemplo@porsupuesto.com"
 					className="form-control"
 					type="email"
 					name="correo"
 					onChange={gestionarcambios}
-					></input>
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					<input
-					placeholder="Ingrese nro. contacto"
+					></Input>
+				</FormGroup>
+				</Col>
+			<Col md={6}>
+				<FormGroup>
+				<Input
+					placeholder="Ingrese nro. teléfono"
 					className="form-control"
 					type="text"
 					name="contacto"
 					onChange={gestionarcambios}
-					></input>
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					<input
+					></Input>
+				</FormGroup>
+				</Col>
+					
+				<Col md={6}>
+				<FormGroup>
+					<Input
 						placeholder="Ingrese clave"
 						className="form-control"
 						type="password"
 						name="clave"
 						onChange={gestionarcambios}
-					></input>
-				</div>
-				<p></p>
-				<div className="cold-md-3">
-					<input
+					></Input>
+					</FormGroup>
+				</Col>
+				
+				<Col md={6}>
+				<FormGroup>
+					<Input
 					placeholder="Confirme clave"
 					className="form-control"
 					type="password"
 					name="confirma"
 					onChange={gestionarcambios}
-					></input>
-				</div>
+					></Input>
+				</FormGroup>
+				</Col>
+		</Row>
+			<h5>Solamente Proveedores</h5>
+<Row>
+		<Col md={6}>
+    			<FormGroup>					
+	 				<Input
+						placeholder="Descripción de la Empresa"
+						className="form-control"
+						type="text"
+						name="descripcion"
+						onChange={gestionarcambios}
+					></Input>
+				</FormGroup>
+    	</Col>
+			<Col md={6}>
+      			<FormGroup>
+				<Input
+					placeholder="Persona Contacto"
+						className="form-control"
+						type="text"
+						name="contacto"
+						onChange={gestionarcambios}
+				
+				></Input>
+				</FormGroup>
+			</Col>
+			<Col md={6}>
+				<FormGroup>
+					<Select placeholder="Categoría de servicio"
+					options = {categoria}
+					onChange={gestionarcambios}
+					/>
+				</FormGroup>
+			</Col>
+			<Col md={6}>
+				<FormGroup>
+					<Select placeholder="Sub-categoría de servicio"
+					options = {categoria}
+					onChange={gestionarcambios}
+					/>
+					</FormGroup>
+			</Col>
+
+</Row>
+			<div className="campos">
 				<div className="Boton"> 
 					<button className="btn btn-primary" type="submit">Aceptar</button>
 				</div>
@@ -190,8 +253,8 @@ export const Signup = (props) => {
 				</div>
 			</Form>
 
-				
+	</div>	
 		
-	</div> 
+	
 	);
 	 }
