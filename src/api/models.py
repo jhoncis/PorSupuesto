@@ -14,11 +14,19 @@ class User(db.Model):
     photo = db.Column(db.String(1000), unique=False,nullable=False)
     phone = db.Column(db.Integer, unique=True,nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean, unique=False, nullable=False)
+    is_active = db.Column(db.Boolean, unique=False, nullable=True)
 
-    def __repr__(self):
-        return f'<User {self.email}>'
-
+    def __init__(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
+        self.email = email
+        self.typeuser = typeuser
+        self.letraidentificacion = letraidentificacion
+        self.indentificacion = indentificacion
+        self.name = name
+        self.direccion = direccion
+        self.region = region
+        self.photo = photo
+        self.phone = phone
+        self.password = password
 
     @classmethod
     def new_user(cls, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
@@ -72,12 +80,19 @@ class User(db.Model):
             "phone": self.phone,
         }
 
-class Proveedores(db.Model):
+
+tags = db.Table('Categoria',
+    db.Column('categorias_id', db.Integer, db.ForeignKey('categoria.id'), primary_key=True),
+    db.Column('proveedores_id', db.Integer, db.ForeignKey('proveedores.id'), primary_key=True)
+)
+
+class Proveedores(User):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #usuario = db.relationship("User")
     personacontacto = db.Column(db.String(120), unique=True, nullable=False)
     id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
+    categoria = db.relationship("Categoria")
     solvente = db.Column(db.Boolean(), unique=False, nullable=False)
     descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
     
@@ -130,7 +145,7 @@ class Proveedores(db.Model):
 class Ranking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
-    #id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
+    id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     calificacion = db.Column(db.Integer, unique=True, nullable = False)
     comentario = db.Column(db.String(300), unique=True, nullable=False)
@@ -183,9 +198,6 @@ class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     descripcion_categoria = db.Column(db.String(300), unique=True, nullable=False)
     descripcion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.email}>'
 
     @classmethod
     def new_categoria(cls, descripcion_categoria, descripcion_subcategoria):
