@@ -73,22 +73,55 @@ def handle_user():
 @api.route("/proveedores",  methods=["POST","GET"])
 def handle_proveedor():
     if(request.method=='GET'):
-        all_proveedor = proveedor.query.all()
+        all_proveedor = Proveedores.query.all()
         return jsonify(
             [ proveedor.serialize() for proveedor in all_proveedor]
         ), 200
     else:
+        email = request.json.get("email", None)
+        typeuser = request.json.get("typeuser", None)
+        letraidentificacion = request.json.get("letraidentificacion", None)
+        indentificacion = request.json.get("indentificacion", None)
+        name = request.json.get("name", None)
+        direccion = request.json.get("direccion", None)
+        region = request.json.get("region", None)
+        photo = request.json.get("photo", None)
+        phone = request.json.get("phone", None)
+        password = request.json.get("password", None)
         personacontacto = request.json.get("personacontacto", None)
+        id_categoria = request.json.get("id_categoria", None)
         solvente = request.json.get("solvente", None)
         descripcion = request.json.get("descripcion", None)
+        if email == None:
+            return 'Falta el email!', 400
+        if typeuser == None:
+            return 'Falta el tipo de Usuario!', 400
+        if letraidentificacion == None:
+            return 'Falta letra de identificacion!', 400
+        if indentificacion == None:
+            return 'Falta numero de identificacion!', 400
+        if name == None:
+            return 'Falta el nombre!', 400
+        if direccion == None:
+            return 'Falta la direccion!', 400
+        if region == None:
+            return 'Falta la region!', 400
+        if photo == None:
+            return 'Falta la foto!', 400
+        if phone == None:
+            return 'Falta el telefono!', 400
+        if password == None:
+            return 'Falta la clave!', 400
         if personacontacto == None:
             return 'Falta la persona de Contacto!', 400
+        if id_categoria == None:
+            return 'Falta la persona de Contacto!', 400
         if solvente == None:
-            return 'No tiene dato de solvencia!', 400
+            return 'Falta la Solvencia!', 400
         if descripcion == None:
             return 'Falta la descripcion!', 400
         else:
-            new_row = Proveedores.new_proveedor(personacontacto, solvente, descripcion)
+            new_row = Proveedores.new_proveedor(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:

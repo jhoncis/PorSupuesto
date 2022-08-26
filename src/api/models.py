@@ -93,19 +93,20 @@ class Proveedores(User):
     personacontacto = db.Column(db.String(120), unique=True, nullable=False)
     id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     categoria = db.relationship("Categoria")
-    solvente = db.Column(db.Boolean(), unique=False, nullable=True)
+    solvente = db.Column(db.Boolean, unique=False, nullable=True)
     descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
    
-    def __init__(self, id_usuario, personacontacto, id_categoria, solvente, descripcion):
-        self.id_usuario = id_usuario
+    def __init__(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion):
+        super().__init__(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
         self.personacontacto = personacontacto
         self.id_categoria = id_categoria
         self.solvente = solvente
         self.descripcion = descripcion
-
+        
+        
     @classmethod
-    def new_proveedor(cls, id_usuario, personacontacto, id_categoria, solvente, descripcion):
-        new_proveedor = cls(id_usuario, personacontacto, id_categoria, solvente, descripcion)
+    def new_proveedor(cls, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion):
+        new_proveedor = cls(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion)
         db.session.add(new_proveedor)
         try:
             db.session.commit()
@@ -148,21 +149,21 @@ class Proveedores(User):
         
 class Ranking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
+    #id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
-    id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
+    #id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     calificacion = db.Column(db.Integer, unique=True, nullable = False)
     comentario = db.Column(db.String(300), unique=True, nullable=False)
+    usuario = db.relationship("User")
 
-    def __init__(self, id_ranking, id_categoria, calificacion, comentario):
-        self.id_ranking = id_ranking
-        self.id_categoria = id_categoria
+    def __init__(self, calificacion, comentario, usuario):
+        self.usuario = usuario
         self.calificacion = calificacion
         self.comentario = comentario
 
     @classmethod
-    def new_ranking(cls, id_ranking, id_categoria, calificacion, comentario):
-        new_ranking = cls(id_ranking, id_categoria, calificacion, comentario)
+    def new_ranking(cls, calificacion, comentario, usuario):
+        new_ranking = cls(calificacion, comentario, usuario)
         db.session.add(new_ranking)
         try:
             db.session.commit()
