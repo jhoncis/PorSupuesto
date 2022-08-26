@@ -152,18 +152,18 @@ class Ranking(db.Model):
     #id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
-    calificacion = db.Column(db.Integer, unique=True, nullable = False)
-    comentario = db.Column(db.String(300), unique=True, nullable=False)
+    calificacion = db.Column(db.Integer, unique=False, nullable = False)
+    comentario = db.Column(db.String(300), unique=False, nullable=False)
     usuario = db.relationship("User")
 
-    def __init__(self, calificacion, comentario, usuario):
+    def __init__(self, usuario, calificacion, comentario):
         self.usuario = usuario
         self.calificacion = calificacion
         self.comentario = comentario
 
     @classmethod
-    def new_ranking(cls, calificacion, comentario, usuario):
-        new_ranking = cls(calificacion, comentario, usuario)
+    def new_ranking(cls, usuario, calificacion, comentario):
+        new_ranking = cls(usuario, calificacion, comentario)
         db.session.add(new_ranking)
         try:
             db.session.commit()
@@ -195,8 +195,10 @@ class Ranking(db.Model):
 
     def serialize(self): 
         return {
-            "id_ranking": self.id_ranking,
-            "id_categoria": self.id_categoria,
+            #"id_ranking": self.id_ranking,
+            #"id_categoria": self.id_categoria,
+            "id" : self.id,
+            "usuario" : self.usuario.serialize(),
             "calificacion": self.calificacion,
             "comentario": self.comentario,
         }

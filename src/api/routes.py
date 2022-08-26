@@ -130,28 +130,34 @@ def handle_proveedor():
 @api.route("/ranking",  methods=["POST","GET"]) 
 def handle_ranking():
     if(request.method=='GET'):
-        all_ranking = ranking.query.all()
+        all_ranking = Ranking.query.all()
         return jsonify(
             [ ranking.serialize() for ranking in all_ranking]
         ), 200
     else:
+        usuario = request.json.get("usuario", None)
         calificacion = request.json.get("calificacion", None)
         comentario = request.json.get("comentario", None)
+        if usuario == None:
+            return 'No se encuentra el usuario!', 400
         if calificacion == None:
             return 'No esta calificado!', 400
         if comentario == None:
             return 'No tiene comentario!', 400
         else:
-            new_row = Ranking.new_ranking(calificacion, comentario)
-            if new_row == None:
-                return 'Un error ha ocurrido!', 500
-            else:
-                return jsonify(new_row.serialize()), 200
+            search = User.query.get(usuario)
+            if search != None:
+                new_row = Ranking.new_ranking(search, calificacion, comentario)
+                if new_row == None:
+                    return 'Un error ha ocurrido!', 500
+                else:
+                    return jsonify(new_row.serialize()), 200
+            return "Ese usuario no existe", 404
 
 @api.route("/categoria",  methods=["POST","GET"]) 
 def handle_categoria():
     if(request.method=='GET'):
-        all_categoria = categoria.query.all()
+        all_categoria = Categoria.query.all()
         return jsonify(
             [ categoria.serialize() for categoria in all_categoria]
         ), 200
