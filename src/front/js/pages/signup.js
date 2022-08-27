@@ -1,16 +1,16 @@
 import React, { Component, Fragment, useState } from "react";
 //import { render } from "react-dom";
-import { Button,FormGroup,Label,Input,FormText,Form,Col,Row } from 'reactstrap';
+import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem } from 'reactstrap';
 import Select from 'react-select';
 import "../../styles/index.css";
 
 
 export const Signup = (props) => {
-	const[opcion,setopcion] = useState(1);
+	const[opcion,setopcion] = useState("N");
 	const cambioestadoopcion=e=>{
 		setopcion(e.target.value);
 	}
-	const[usuario,setusuario] = useState({
+	const[usuario,setUsuario] = useState({
 		nombre: '',
 		identificacion: '',
 		region:' ',
@@ -23,9 +23,12 @@ export const Signup = (props) => {
 
 
 	});
+	
+	
+
 	const gestionarcambios = (evento) => {
-		console.log(evento.target.value)
-		setusuario({
+		//console.log(evento.target.value)
+		setUsuario({
 			...usuario,
 			[evento.target.name]: evento.target.value
 		}
@@ -60,28 +63,31 @@ export const Signup = (props) => {
 		{label: 'Zulia', value: 'Zulia'},
 		{label: 'Dependencias Federales', value: 'Aanzoátegui'},
 		{label: 'Dependencias Federales', value: 'Dependencias Federales'},
+		 ]
 		
 
-	]
-	const categoria = [
-		{label: 'Hogar', value: 'Hogar'},
-		{label: 'Oficina', value: 'Oficina'},
-		{label: 'Exteriores', value: 'Exteriores'},
-		
-	]
+	
+	const enviarDatos = (evento) => {
+		evento.preventDefault();
+	}
+	
+
 	return (<div className="contenedor px-4 py-4 vh-100">
-			<Form className="row"> 
+		<img src="https://picsum.photos/200/200.jpg" class="rounded float-end" alt="..."></img>
+		<div className="w-50 p-3 style=background-color: #eee;">
+		
+			<Form className="row" onSubmit={enviarDatos}> 
 				<div className="radiobutton">
 					<FormGroup>
 						<Input
 							id="radio1"
 							type="radio"
-							value="1"
-							checked = {opcion== 1 ? true : false }
+							value="N"
+							checked = {opcion== "N" ? true : false }
 							onChange={cambioestadoopcion}
 						/>
 						<Label for="radio1">
-							Persona Natural    
+							Natural    
 						</Label>
 				
 						</FormGroup>
@@ -89,28 +95,30 @@ export const Signup = (props) => {
 					<Input
 						id="radio2"
 						type="radio"
-						value="2"
-						checked = {opcion== 2 ? true : false }
+						value="J"
+						checked = {opcion== "J" ? true : false }
 						onChange={cambioestadoopcion}
 					/>
 					<Label for="radio2">
-						Persona Jurídica
+						Jurídica
 					</Label>
 				</FormGroup>
 				<FormGroup>
 					<Input
 					id="radio3"
 					type="radio"
-					value="3"
-					checked = {opcion== 3 ? true : false }
+					value="P"
+					checked = {opcion== "P" ? true : false }
 					onChange={cambioestadoopcion}
 					/>
 					<Label for="radio3">
-						Quiero ser Proveedor
+						Proveedor
 					</Label>
 				</FormGroup>
 				</div>
+				
 				<h3>Formulario de registro</h3>
+				
   	<Row>
     	<Col md={6}>
       			<FormGroup>	
@@ -119,6 +127,7 @@ export const Signup = (props) => {
 							className="form-control"
 							type="text"
 							name="nombre"
+							
 							onChange={gestionarcambios}
 						></Input>
 				</FormGroup>
@@ -138,6 +147,7 @@ export const Signup = (props) => {
 			<Col md={6}>
       			<FormGroup>
 					<Select placeholder="Seleccionar región"
+					name="region"
 					options = {regiones}
 					onChange={gestionarcambios}
 					/>
@@ -227,32 +237,144 @@ export const Signup = (props) => {
 				></Input>
 				</FormGroup>
 			</Col>
-			<Col md={6}>
+			<Col md={4}>
+				<h6>Categoría Hogar</h6>
 				<FormGroup>
-					<Select placeholder="Categoría de servicio"
-					options = {categoria}
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="hogar1"
+					type="checkbox"
+					name="catehogar"
+					value="Remodelar cocina"
 					onChange={gestionarcambios}
-					/>
+					></Input>
+					<Label for="hogar1">
+						Remodelar cocina</Label>
+					</div>
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="hogar2"
+					type="checkbox"
+					name="catehogar"
+					value="Reparar gabinetes de cocina"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="hogar2">
+					Reparar gabinetes de cocina</Label>
+					</div>
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="hogar3"
+					type="checkbox"
+					name="catehogar"
+					value="Remodelar dormitorio"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="hogar3">
+					Remodelar dormitorio</Label>
+					</div>
 				</FormGroup>
 			</Col>
-			<Col md={6}>
+			<Col md={4}>
+				<h6>Categoría Oficina</h6>
 				<FormGroup>
-					<Select placeholder="Sub-categoría de servicio"
-					options = {categoria}
+					
+					<div className="d-flex">
+					
+					<Input
+					id="oficina1"
+					className="form-control"
+					type="checkbox"
+					name="cateoficina"
+					value="Remodelar recepción"
 					onChange={gestionarcambios}
-					/>
-					</FormGroup>
+					></Input>
+					<Label for="oficina1">
+					Remodelar recepción</Label>
+					</div>
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="oficina2"
+					type="checkbox"
+					name="cateoficina"
+					value="Pintar oficina"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="oficina2">
+					Pintar oficina</Label>
+					</div>
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="oficina3"
+					type="checkbox"
+					name="cateoficina"
+					value="Remodelar oficina"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="oficina3">
+					Remodelar oficina</Label>
+					</div>
+				</FormGroup>
+			</Col>
+			<Col md={4}>
+				<h6>Categoría Exteriores</h6>
+				<FormGroup>
+					
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="exterior1"
+					type="checkbox"
+					name="cateoficina"
+					value="Remodelar recepción"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="exterior1">
+					Mantenimiento jardín</Label>
+					</div>
+					
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="exterior2"
+					type="checkbox"
+					name="cateoficina"
+					value="Hacer jardín paisajismo"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="exterior2">
+					Hacer jardín paisajismo</Label>
+					</div>
+					
+					<div className="d-flex">
+					<Input
+					className="form-control"
+					id="exterior3"
+					type="checkbox"
+					name="cateoficina"
+					value="Remodelar oficina"
+					onChange={gestionarcambios}
+					></Input>
+					<Label for="exterior3">
+					Mantenimiento piscina</Label>
+					</div>
+				</FormGroup>
 			</Col>
 
 </Row>
 			<div className="campos">
 				<div className="Boton"> 
-					<button className="btn btn-primary" type="submit">Aceptar</button>
+					<button className="btn btn-primary" type="submit">Enviar Datos</button>
 				</div>
 		
 				</div>
 			</Form>
-
+		</div>
 	</div>	
 		
 	
