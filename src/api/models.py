@@ -5,7 +5,7 @@ db = SQLAlchemy()
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), unique=True, nullable=False)
-    typeuser = db.Column(db.String(1), unique=True,nullable=False)
+    typeuser = db.Column(db.String(1), unique=False,nullable=False)
     letraidentificacion = db.Column(db.String(1), unique=False,nullable=False)
     indentificacion = db.Column(db.Integer, unique=True, nullable=False)
     name = db.Column(db.String(10), unique=False,nullable=False)
