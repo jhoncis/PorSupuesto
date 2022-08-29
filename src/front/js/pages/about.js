@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem } from 'reactstrap';
+import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem,Card,CardBody,CardTitle,CardSubtitle,CardText,CardImg,CardGroup } from 'reactstrap';
+import "../../styles/index.css";
+
 
 export const About = () => (
-	<div className="container px-4 vh-100">
-		<h2>Proveedor</h2>
-		<div className="">
-		<Row>
+	<div className="contenedor px-4 py-4 vh-100">
+    <div className="infoprov">
+		  <Row>
+			<h3>Usuario Proveedor</h3>
+      
     	<Col md={6}>
       			<FormGroup>	
 						<Input
-							placeholder="Nombre del Proveedor"
 							id="proveedor"
 							className="form-control"
 							type="text"
@@ -49,13 +51,69 @@ export const About = () => (
 						<Label for="region"></Label>
 				</FormGroup>
 		</Col>
-		<div className="d-grid gap-2 d-md-block">
-					<Button type="button" className="btn btn-primary" data-bs-toggle="button">Gestionar clientes</Button>
-		 			<Button type="button" className="btn btn-primary" data-bs-toggle="button">Descargar modelo Presupuesto</Button>
-		 			<Button type="button" className="btn btn-primary" data-bs-toggle="button">Actualizar categorías</Button>
-					<Button type="button" className="btn btn-primary" data-bs-toggle="button">Perfil Usuario</Button>
-		</div>
-		</Row>
+    		</Row>
+    </div>
+    <div className="opciones">
+		<CardGroup>
+  <Card>
+    <CardImg
+      alt="Card image cap"
+      src="https://st2.depositphotos.com/1071909/6630/i/450/depositphotos_66305687-stock-photo-marketing-segmentation-customers-care.jpg"
+      top
+      width="100%"
+    />
+    <CardBody>
+      <CardTitle tag="h6">
+	  Gestionar clientes
+      </CardTitle>
+      <CardText>
+        Calificación de nuestros clientes.Contacta clientes potenciales.
+      </CardText>
+      <Button>
+        Clientes
+      </Button>
+    </CardBody>
+  </Card>
+  <Card>
+    <CardImg
+      alt="Card image cap"
+      src="https://st2.depositphotos.com/1202020/45957/i/450/depositphotos_459573162-stock-photo-illustration-many-pawns-segmented-different.jpg"
+      top
+      width="100%"
+    />
+    <CardBody>
+      <CardTitle tag="h6">
+	  Actualizar categorías
+      </CardTitle>
+      <CardText>
+        Manten actualizado los servicios que ofreces.
+      </CardText>
+      <Button>
+        Categoría
+      </Button>
+    </CardBody>
+  </Card>
+  <Card>
+    <CardImg
+      alt="Card image cap"
+      src="https://st2.depositphotos.com/3591429/12476/i/450/depositphotos_124764912-stock-photo-man-with-digital-tablet.jpg"
+      top
+      width="100%"
+    />
+    <CardBody>
+      <CardTitle tag="h6">
+        Perfil de Usuario
+      </CardTitle>
+      <CardText>
+        Edita tu perfil de usuario
+      </CardText>
+      <Button>
+        Usuario
+      </Button>
+    </CardBody>
+  </Card>
+</CardGroup>	
+</div>
 	</div>	
-	</div>
+	
 );

@@ -3,113 +3,33 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import 'animate.css';
 import "../../styles/home.css";
-import {
-    Carousel,
-    CarouselItem,
-    CarouselControl,
-    CarouselIndicators,
-    CarouselCaption,
-  } from 'reactstrap';
+import Carousel from '../component/Carousel';
   
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-   
-	return (
-		<header className="bg-warning bg-gradient text-white vh-100">
-            <div className="container d-flex flex-column h-100 px-4 text-center justify-content-center align-items-center">
-                <h1 className="animate__animated animate__rotateIn">Porsupuesto</h1>
-                <p className="lead">Bienvenido a tu aplicación para consulta de servicios</p>
-                <a className="btn btn-lg btn-light" href="#about">Start scrolling!</a>
-            </div>
-        </header>
+  
+ 	return (
+         <div>
+           <div className="gira px-4 vh-90">
+             <Carousel/>
+             <h1 className="animate__animated animate__rotateIn" align="center">Porsupuesto</h1>
+                <p className="lead" align="center">Bienvenido a tu aplicación para consulta de servicios"</p>
+           </div>   
+           
+           <div className="acerca">
+            <h2>Acerca de Nosotros</h2>
+              <div className="izquierda">
+                <p>Porsupuesto es una propuesta para facilitar a nuestros clientes la tarea de ubicar y contactar proveedores que los acompañen en sus proyectos de remodelación de hogar, oficina o exteriores</p>
+             <p> Nuestros proveedores tienen la oportunidad de publicitar sus servicios y la posibilidad de interactuar con clientes potenciales</p>
+              </div>
+              <div className="derecha">
+                 <img src="https://st.depositphotos.com/1010043/3075/i/450/depositphotos_30753345-stock-photo-room-addition.jpg" alt="..." />   
+              </div>
+           
+              
+           </div>
+          </div>  
+  
 	);
 };
-
-
-const items = [
-  {
-    src: 'https://picsum.photos/id/123/1200/400',
-    altText: 'Slide 1',
-    caption: 'Slide 1',
-    key: 1,
-  },
-  {
-    src: 'https://picsum.photos/id/456/1200/400',
-    altText: 'Slide 2',
-    caption: 'Slide 2',
-    key: 2,
-  },
-  {
-    src: 'https://picsum.photos/id/678/1200/400',
-    altText: 'Slide 3',
-    caption: 'Slide 3',
-    key: 3,
-  },
-];
-
-function Example(args) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
-
-  const next = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
-  };
-
-  const previous = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
-  };
-
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  };
-
-  const slides = items.map((item) => {
-    return (
-      <CarouselItem
-        onExiting={() => setAnimating(true)}
-        onExited={() => setAnimating(false)}
-        key={item.src}
-      >
-        <img src={item.src} alt={item.altText} />
-        <CarouselCaption
-          captionText={item.caption}
-          captionHeader={item.caption}
-        />
-      </CarouselItem>
-    );
-  });
-
-  return (
-    <Carousel
-      activeIndex={activeIndex}
-      next={next}
-      previous={previous}
-      {...args}
-    >
-      <CarouselIndicators
-        items={items}
-        activeIndex={activeIndex}
-        onClickHandler={goToIndex}
-      />
-      {slides}
-      <CarouselControl
-        direction="prev"
-        directionText="Previous"
-        onClickHandler={previous}
-      />
-      <CarouselControl
-        direction="next"
-        directionText="Next"
-        onClickHandler={next}
-      />
-    </Carousel>
-  );
-}
-
-export default Example;

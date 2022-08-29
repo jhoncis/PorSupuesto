@@ -73,7 +73,10 @@ export const Signup = (props) => {
 	
 
 	return (<div className="contenedor px-4 py-4 vh-100">
-		<img src="https://picsum.photos/200/200.jpg" class="rounded float-end" alt="..."></img>
+		
+		<img src="https://picsum.photos/id/1/367/267" className="circular--square " alt="..."></img>
+		
+		
 		<div className="w-50 p-3 style=background-color: #eee;">
 		
 			<Form className="row" onSubmit={enviarDatos}> 
@@ -262,7 +265,7 @@ export const Signup = (props) => {
 					onChange={gestionarcambios}
 					></Input>
 					<Label for="hogar2">
-					Reparar gabinetes de cocina</Label>
+					Gabinetes de cocina</Label>
 					</div>
 					<div className="d-flex">
 					<Input
@@ -367,12 +370,12 @@ export const Signup = (props) => {
 			</Col>
 
 </Row>
-			<div className="campos">
+			
 				<div className="Boton"> 
 					<button className="btn btn-primary" type="submit">Enviar Datos</button>
 				</div>
 		
-				</div>
+			
 			</Form>
 		</div>
 	</div>	
