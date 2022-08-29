@@ -1,27 +1,32 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment, useState, useContext } from "react";
 //import { render } from "react-dom";
 import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem } from 'reactstrap';
 import Select from 'react-select';
 import "../../styles/index.css";
+import { Context } from "../store/appContext";
 
 
 export const Signup = (props) => {
+	const {store, actions} = useContext(Context)
 	const[opcion,setopcion] = useState("N");
 	const cambioestadoopcion=e=>{
 		setopcion(e.target.value);
 	}
 	const[usuario,setUsuario] = useState({
-		nombre: '',
-		identificacion: '',
-		region:' ',
-		direccion:' ',
-		correo: ' ',
-		contacto: ' ',
-		clave: ' ',
-		confirma: ' ',
-		categoria: ' '
-
-
+		nombre: 'samuel',
+		identificacion: '45678920',
+		region:'capital ',
+		direccion:'caracas',
+		correo: 'samuel@hotmail.com ',
+		contacto: 'samuel',
+		clave: '123456',
+		confirma: '123456',
+		categoria: 'hogar',
+		subcategoria: 'exterior',
+		typeuser: 'n',
+		letraidentificacion: 'j',
+		photo: '',
+		phone: '041457895'
 	});
 	
 	
@@ -31,9 +36,11 @@ export const Signup = (props) => {
 		setUsuario({
 			...usuario,
 			[evento.target.name]: evento.target.value
-		}
-
-		)
+		})
+	}
+	const registrar = (evento) => {
+		evento.preventDefault();
+		actions.signup(usuario)
 	}
 
 	const regiones = [
@@ -372,7 +379,7 @@ export const Signup = (props) => {
 </Row>
 			
 				<div className="Boton"> 
-					<button className="btn btn-primary" type="submit">Enviar Datos</button>
+					<button className="btn btn-primary" type="submit" onClick={registrar}>Aceptar</button>
 				</div>
 		
 			

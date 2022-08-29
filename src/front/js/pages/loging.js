@@ -31,7 +31,7 @@ export const Loging = () => {
         password: password,
       }),
     };
-    fetch(process.env.BACKEND_URL + "/api/token", opts)
+    fetch(process.env.BACKEND_URL + "/api/loging", opts)
       .then((resp) => {
         if (resp.status === 200) return resp.json();
         else alert("There has been some error");
