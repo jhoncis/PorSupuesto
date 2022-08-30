@@ -120,7 +120,7 @@ def handle_proveedor():
         if personacontacto == None:
             return 'Falta la persona de Contacto!', 400
         if id_categoria == None:
-            return 'Falta la persona de Contacto!', 400
+            return 'Falta ID Categoria!', 400
         if solvente == None:
             return 'Falta la Solvencia!', 400
         if descripcion == None:

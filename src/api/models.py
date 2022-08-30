@@ -206,8 +206,8 @@ class Ranking(db.Model):
 
 class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    descripcion_categoria = db.Column(db.String(300), unique=True, nullable=False)
-    descripcion_subcategoria = db.Column(db.String(300), unique=True, nullable=False)
+    descripcion_categoria = db.Column(db.String(300), unique=False, nullable=False)
+    descripcion_subcategoria = db.Column(db.String(300), unique=False, nullable=False)
 
     def __init__(self, descripcion_categoria, descripcion_subcategoria):
         self.descripcion_categoria = descripcion_categoria

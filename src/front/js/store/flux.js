@@ -61,9 +61,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           const data = await resp.json();
           console.log("this came from the backend", data);
-          sessionStorage.setItem("token", data.access_token);
+          sessionStorage.setItem("token", data.token);
           setStore({
-            token: data.access_token,
+            token: data.token,
             usuario: data.user,
             rol: data.rol,
           });
@@ -97,7 +97,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         console.log("Usuario", usuario);
         try {
-          const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts);
+          if (usuario.typeuser=="C"){
+            const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts);
+          }
+          else{
+            const resp = await fetch(process.env.BACKEND_URL + "/api/proveedores", opts);
+          }
           if (resp.status !== 200) {
             alert("There has been some error");
             return false;
@@ -109,6 +114,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         } catch (error) {
           console.error("There has been an error login in");
+        }
+      },
+
+      getCategoria: async () => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/categoria");
+          const data = await resp.json();
+          console.log(data)
+          setStore({ categorias: data });
+          // don't forget to return something, that is how the async resolves
+          return data;
+        } catch (error) {
+          console.log("Error loading message from backend", error);
         }
       },
 
