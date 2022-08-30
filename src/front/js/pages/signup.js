@@ -13,20 +13,21 @@ export const Signup = (props) => {
 		setopcion(e.target.value);
 	}
 	const[usuario,setUsuario] = useState({
-		nombre: 'samuel',
-		identificacion: '45678920',
-		region:'capital ',
-		direccion:'caracas',
-		correo: 'samuel@hotmail.com ',
-		contacto: 'samuel',
-		clave: '123456',
-		confirma: '123456',
-		categoria: 'hogar',
-		subcategoria: 'exterior',
-		typeuser: 'n',
-		letraidentificacion: 'j',
+		nombre: '',
+		identificacion: '',
+		region:'',
+		direccion:'',
+		correo: '',
+		contacto: '',
+		clave: '',
+		confirma: '',
+		categoria: '',
+		subcategoria: '',
+		typeuser: '',
+		letraidentificacion: '',
 		photo: '',
-		phone: '041457895'
+		phone: '',
+		personacontacto: ''
 	});
 	
 	
@@ -156,11 +157,88 @@ export const Signup = (props) => {
 	
 			<Col md={6}>
       			<FormGroup>
-					<Select placeholder="Seleccionar región"
-					name="region"
-					options = {regiones}
-					onChange={gestionarcambios}
-					/>
+				  <Input
+				  		placeholder="Seleccione región"
+      					id="exampleSelect"
+      					name="region"
+    					  type="select"
+  				  >
+     					 <option>
+     					  	 Amazonas
+   						</option>
+    					<option>
+	 						 Anzoátegui
+      					</option>
+						<option>
+							Apure
+   						</option>
+    					<option>
+							Aragua
+      					</option>
+						  <option>
+							Barinas
+   						</option>
+    					<option>
+							Bolívar
+      					</option>
+						<option>
+							Carabobo
+							</option>
+    					<option>
+							Cojedes
+      					</option>
+						  <option>
+						  Delta Amacuro
+   						</option>
+    					<option>
+						Distrito Capital
+      					</option>
+						<option>
+						Falcón
+   						</option>
+    					<option>
+						Guárico
+      					</option>
+						  <option>
+						  La Guaira
+   						</option>
+    					<option>
+						Lara
+      					</option>
+						<option>
+						Mérida
+   						</option>
+    					<option>
+						Miranda
+      					</option>
+						  <option>
+						  Monagas
+   						</option>
+    					<option>
+						Nueva Esparta
+      					</option>
+						<option>
+						Portuguesa
+   						</option>
+    					<option>
+						Sucre
+      					</option>
+						  <option>
+						  Táchira
+   						</option>
+    					<option>
+						Trujillo
+      					</option>
+						<option>
+						Yaracuy
+   						</option>
+    					<option>
+						Zulia
+      					</option>
+						  <option>
+						  Dependencias Federales
+   						</option>
+	  				</Input>
 				</FormGroup>
 			</Col>
 			<Col md={6}>
