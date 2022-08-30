@@ -8,7 +8,7 @@ import { Context } from "../store/appContext";
 
 export const Signup = (props) => {
 	const {store, actions} = useContext(Context)
-	const[opcion,setopcion] = useState("N");
+	const[opcion,setopcion] = useState();
 	const cambioestadoopcion=e=>{
 		setopcion(e.target.value);
 	}
@@ -27,7 +27,8 @@ export const Signup = (props) => {
 		letraidentificacion: '',
 		photo: '',
 		phone: '',
-		personacontacto: ''
+		personacontacto: '',
+		typeuser: ''
 	});
 	
 	
@@ -94,6 +95,7 @@ export const Signup = (props) => {
 							id="radio1"
 							type="radio"
 							value="N"
+							name = "letraidentificacion"
 							checked = {opcion== "N" ? true : false }
 							onChange={cambioestadoopcion}
 						/>
@@ -107,6 +109,7 @@ export const Signup = (props) => {
 						id="radio2"
 						type="radio"
 						value="J"
+						name = "letraidentificacion"
 						checked = {opcion== "J" ? true : false }
 						onChange={cambioestadoopcion}
 					/>
@@ -119,6 +122,7 @@ export const Signup = (props) => {
 					id="radio3"
 					type="radio"
 					value="P"
+					name = "typeuser"
 					checked = {opcion== "P" ? true : false }
 					onChange={cambioestadoopcion}
 					/>
@@ -270,7 +274,7 @@ export const Signup = (props) => {
 					placeholder="Ingrese nro. teléfono"
 					className="form-control"
 					type="text"
-					name="contacto"
+					name="phone"
 					onChange={gestionarcambios}
 					></Input>
 				</FormGroup>
@@ -319,7 +323,7 @@ export const Signup = (props) => {
 					placeholder="Persona Contacto"
 						className="form-control"
 						type="text"
-						name="contacto"
+						name="personacontacto"
 						onChange={gestionarcambios}
 				
 				></Input>
