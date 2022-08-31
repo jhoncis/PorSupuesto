@@ -1,8 +1,11 @@
 import React, { Component, useContext, useState } from "react";
+import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem,Navbar,Modal } from 'reactstrap';
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import "../../styles/index.css";
+import "../../styles/login.css";
 
 export const Loging = () => {
   const { store, actions } = useContext(Context);
@@ -46,28 +49,68 @@ export const Loging = () => {
   };
 
   return (
-    <div className="container px-4 vh-100 text-center mt-5">
-      <h1><p className="mt-5 text-center">Loging</p></h1>
+<div className="contenedorlogin px-4 py-4 vh-100">
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<div className="container bootstrap snippets bootdey">
+<div className="lc-block col-md-5 col-md-offset-5 toggled" id="l-login">
+  <div className="lcb-float"><i className="fa fa-users"></i></div>
+    
+      <div className="modal-header">
+            <h1>Login</h1>
+      </div>
+
+    
+      
       {store.token && store.token!="" && store.token!=undefined? (
         "You are logged in with this token" + store.token
       ):(
-        <div>
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleClick}>Loging</button>
+        <div className="modal-body">
+          <form class="form col-md-12 center-block">
+          <div className="form-group">
+             <input
+               className="form-control input-lg"
+               type="text"
+               placeholder="Correo electrónico"
+                autofocus="autofocus"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+          </div>
+
+          <div className="form-group">
+            <input
+               className="form-control input-lg"
+               type="password"
+                placeholder="Password"
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+             />
+          </div>
+          </form>
+          <div className="form-group">
+              <button className="btn btn-block btn-primary btn-float m-t-25" onClick={handleClick}>Sign In</button>
+          </div>
+       
+         
         </div>
+
+   
+    
 
         )}
     </div>
+    </div>
+  
+
+
+
+ 
+
+
+
+</div>
   );
 };
