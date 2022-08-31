@@ -1,7 +1,7 @@
 import React, { Component, Fragment, useState, useContext  } from "react";
 import ReactStars from 'react-stars'
 import "../../styles/service.css";
-//import {useEffect, useState} from 'react';
+//import { useEffect } from 'react';
 //import axios from "axios";
 
 
@@ -21,9 +21,25 @@ export const Ranking = () => {
 
 	return(
 	<div className="contenedor px-4 py-4 vh-100">
-		<p className="text-center"></p>
-		<h1>Ranking de proveedores</h1>
-		<div className="container">
+				<div className="d-flex justify-content-start">
+					<p className=""><h1>Ranking de proveedores</h1></p>
+						<div className="col-4 col-md-4 col-lg-8">
+							<form className="card card-sm">
+								<div className="card-body row no-gutters align-items-center">
+									<div className="col-auto">
+										<i className="fas fa-search h4 text-body"></i>
+									</div>
+									<div className="col">
+										<imput className="form-control form-control-lg form-control-borderless" type="search" placeholder="Buscar categoria"/>
+									</div>
+									<div className="col-auto">
+										<button className="btn btn-lg btn-success" type="submit">Search</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				<div>
 			<div className="row">
 				<div className="col-xl-3 col-sm-6">
 					<div className="card">
@@ -42,8 +58,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "3.5"
             					/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -70,8 +86,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -98,8 +114,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "2.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -128,8 +144,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "4.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -158,8 +174,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "1.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -186,8 +202,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "3.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -214,8 +230,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "2.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -242,8 +258,8 @@ export const Ranking = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={true}
-									value= "calificacion"
+									edit={false}
+									value= "4.5"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
