@@ -4,22 +4,22 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
     typeuser = db.Column(db.String(1), unique=False,nullable=False)
-    letraidentificacion = db.Column(db.String(1), unique=False,nullable=False)
+    #letraidentificacion = db.Column(db.String(1), unique=False,nullable=True)
     indentificacion = db.Column(db.Integer, unique=True, nullable=False)
-    name = db.Column(db.String(10), unique=False,nullable=False)
+    name = db.Column(db.String(100), unique=False,nullable=False)
     direccion = db.Column(db.String(120), unique=False,nullable=False)
-    region = db.Column(db.String(10), unique=False,nullable=False)
+    region = db.Column(db.String(100), unique=False,nullable=False)
     photo = db.Column(db.String(1000), unique=False,nullable=False)
     phone = db.Column(db.Integer, unique=True,nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean, unique=False, nullable=True)
 
-    def __init__(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
+    def __init__(self, email, typeuser, indentificacion, name, direccion, region, photo, phone, password):
         self.email = email
         self.typeuser = typeuser
-        self.letraidentificacion = letraidentificacion
+        #self.letraidentificacion = letraidentificacion
         self.indentificacion = indentificacion
         self.name = name
         self.direccion = direccion
@@ -29,8 +29,8 @@ class User(db.Model):
         self.password = password
 
     @classmethod
-    def new_user(cls, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
-        new_user = cls(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
+    def new_user(cls, email, typeuser, indentificacion, name, direccion, region, photo, phone, password):
+        new_user = cls(email, typeuser, indentificacion, name, direccion, region, photo, phone, password)
         db.session.add(new_user)
         try:
             db.session.commit()
@@ -39,11 +39,11 @@ class User(db.Model):
             print(error)
             return None
 
-    def update(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password):
+    def update(self, email, typeuser, indentificacion, name, direccion, region, photo, phone, password):
         self.email = email
         self.typeuser = typeuser
         self.letraidentificacion = letraidentificacion
-        self.indentificacion = indentificacion
+        #self.indentificacion = indentificacion
         self.name = name
         self.direccion = direccion
         self.region = region
@@ -71,7 +71,7 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "typeuser": self.typeuser,
-            "letraidentificacion": self.letraidentificacion,
+            #"letraidentificacion": self.letraidentificacion,
             "indentificacion": self.indentificacion,
             "name": self.name,
             "direccion": self.direccion,
@@ -90,23 +90,23 @@ class Proveedores(User):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #usuario = db.relationship("User")
-    personacontacto = db.Column(db.String(120), unique=True, nullable=False)
+    personacontacto = db.Column(db.String(120), unique=False, nullable=False)
     id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     categoria = db.relationship("Categoria")
-    solvente = db.Column(db.Boolean, unique=False, nullable=True)
-    descripcion = db.Column(db.String(300), unique=True, nullable=False) #Breve descripcion de
+    #solvente = db.Column(db.Boolean, unique=False, nullable=True)
+    descripcion = db.Column(db.String(300), unique=False, nullable=False) #Breve descripcion de
    
-    def __init__(self, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion):
-        super().__init__(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
+    def __init__(self, email, typeuser,  indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, descripcion): #,
+        super().__init__(email, typeuser,  indentificacion, name, direccion, region, photo, phone, password)
         self.personacontacto = personacontacto
         self.id_categoria = id_categoria
-        self.solvente = solvente
+        #self.solvente = solvente
         self.descripcion = descripcion
         
         
     @classmethod
-    def new_proveedor(cls, email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion):
-        new_proveedor = cls(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion)
+    def new_proveedor(cls, email, typeuser,  indentificacion, name, direccion, region, photo, phone, password, personacontacto,id_categoria, descripcion): #id_categoria,
+        new_proveedor = cls(email, typeuser,  indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, descripcion) #id_categoria,
         db.session.add(new_proveedor)
         try:
             db.session.commit()
@@ -115,10 +115,10 @@ class Proveedores(User):
             print(error)
             return None
 
-    def update(self, id_usuario, personacontacto, id_categoria, solvente, descripcion):
+    def update(self, id_usuario, personacontacto, solvente, descripcion):  #id_categoria
         self.id_usuario = id_usuario
         self.personacontacto = personacontacto
-        self.id_categoria = id_categoria
+        #self.id_categoria = id_categoria
         self.solvente = solvente
         self.descripcion = descripcion
         try:
@@ -142,8 +142,8 @@ class Proveedores(User):
             "id": self.id,
             "id_usuario": self.id_usuario,
             "personacontacto": self.personacontacto,
-            "id_categoria": self.id_categoria,
-            "solvente": self.solvente,
+            #"id_categoria": self.id_categoria,
+            #"solvente": self.solvente,
             "descripcion": self.descripcion,
         }
         
@@ -153,7 +153,7 @@ class Ranking(db.Model):
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
     calificacion = db.Column(db.Integer, unique=False, nullable = False)
-    comentario = db.Column(db.String(300), unique=False, nullable=False)
+    comentario = db.Column(db.String(300), unique=False, nullable=True)
     usuario = db.relationship("User")
 
     def __init__(self, usuario, calificacion, comentario):
@@ -246,7 +246,8 @@ class Categoria(db.Model):
     def serialize(self): 
         return {
             "descripcion_categoria": self.descripcion_categoria,
-            "descripcion_subcategoria": self.descripcion_subcategoria
+            "descripcion_subcategoria": self.descripcion_subcategoria,
+            "id_categoria": self.id
         }
 
 

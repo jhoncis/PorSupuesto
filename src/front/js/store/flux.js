@@ -72,19 +72,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("There has been an error login in");
         }
       },
-
+      
+      
       signup: async (user) => {
+        console.log("User", user.categoria);
+        const store = getStore();
         const usuario = {
           email: user.correo,
           typeuser: user.typeuser,
           letraidentificacion: user.letraidentificacion,
-          indentificacion: user.identificacion,
+          indentificacion: parseInt(user.identificacion),
           name: user.nombre,
           direccion: user.direccion,
           region: user.region,
           photo: user.photo,
           phone: user.phone,
           password: user.clave,
+          categoria : store.categorias.filter(x=>user.categoria==x.id_categoria),
+          id_categoria: user.categoria,
           personacontacto: user.personacontacto,
           descripcion: user.descripcion,
         };
@@ -95,7 +100,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify(usuario),
         };
-        console.log("Usuario", usuario);
         try {
           if (usuario.typeuser=="C"){
             const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts);

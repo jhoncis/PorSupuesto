@@ -32,9 +32,8 @@ export const Signup = (props) => {
     clave: "",
     confirma: "",
     categoria: "",
-    subcategoria: "",
     typeuser: "",
-    letraidentificacion: "",
+    //letraidentificacion: "",
     photo: "",
     phone: "",
     personacontacto: "",
@@ -96,26 +95,12 @@ export const Signup = (props) => {
       <div className="w-50 p-3 style=background-color: #eee;">
         <Form className="row" onSubmit={enviarDatos}>
           <div className="radiobutton">
-            {/* <FormGroup>
-						<Input
-							id="radio1"
-							type="radio"
-							value="N"
-							name = "letraidentificacion"
-							checked = {opcion== "N" ? true : false }
-							onChange={cambioestadoopcion}
-						/>
-						<Label for="radio1">
-							Natural    
-						</Label>
-				
-						</FormGroup> */}
             <FormGroup>
               <Input
                 id="radio2"
                 type="radio"
-                value="J"
-                name="letraidentificacion"
+                value="C"
+                name="typeuser"
                 checked={opcion == "C" ? true : false}
                 onChange={cambioestadoopcion}
               />
@@ -167,6 +152,7 @@ export const Signup = (props) => {
                   id="exampleSelect"
                   name="region"
                   type="select"
+                  onChange={gestionarcambios}
                 >
                   <option>Amazonas</option>
                   <option>Anzoátegui</option>
@@ -280,17 +266,18 @@ export const Signup = (props) => {
               </FormGroup>
             </Col>
             <Col md={4}>
-              
               <FormGroup>
                 {store.categorias && (
                   <Input
                     placeholder="Seleccione categoria"
                     id="exampleSelectCategoria"
+                    className="form-control"
                     name="categoria"
                     type="select"
+                    onChange={gestionarcambios}
                   >
                     {store.categorias.map((categoria, index) => (
-                      <option key={index}>
+                      <option key={index} value={categoria.id_categoria}>
                         {categoria.descripcion_categoria +
                           " " +
                           categoria.descripcion_subcategoria}

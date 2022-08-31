@@ -40,7 +40,7 @@ def handle_user():
     else:
         email = request.json.get("email", None)
         typeuser = request.json.get("typeuser", None)
-        letraidentificacion = request.json.get("letraidentificacion", None)
+        #letraidentificacion = request.json.get("letraidentificacion", None)
         indentificacion = request.json.get("indentificacion", None)
         name = request.json.get("name", None)
         direccion = request.json.get("direccion", None)
@@ -52,8 +52,8 @@ def handle_user():
             return 'Falta el email!', 400
         if typeuser == None:
             return 'Falta el tipo de Usuario!', 400
-        if letraidentificacion == None:
-            return 'Falta letra de identificacion!', 400
+       # if letraidentificacion == None:
+        #    return 'Falta letra de identificacion!', 400
         if indentificacion == None:
             return 'Falta numero de identificacion!', 400
         if name == None:
@@ -69,7 +69,7 @@ def handle_user():
         if password == None:
             return 'Falta la clave!', 400
         else:
-            new_row = User.new_user(email, typeuser ,letraidentificacion, indentificacion, name, direccion, region, photo, phone, password)
+            new_row = User.new_user(email, typeuser , indentificacion, name, direccion, region, photo, phone, password)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:
@@ -85,7 +85,7 @@ def handle_proveedor():
     else:
         email = request.json.get("email", None)
         typeuser = request.json.get("typeuser", None)
-        letraidentificacion = request.json.get("letraidentificacion", None)
+        #letraidentificacion = request.json.get("letraidentificacion", None)
         indentificacion = request.json.get("indentificacion", None)
         name = request.json.get("name", None)
         direccion = request.json.get("direccion", None)
@@ -95,14 +95,14 @@ def handle_proveedor():
         password = request.json.get("password", None)
         personacontacto = request.json.get("personacontacto", None)
         id_categoria = request.json.get("id_categoria", None)
-        solvente = request.json.get("solvente", None)
+        #solvente = request.json.get("solvente", None)
         descripcion = request.json.get("descripcion", None)
         if email == None:
             return 'Falta el email!', 400
         if typeuser == None:
             return 'Falta el tipo de Usuario!', 400
-        if letraidentificacion == None:
-            return 'Falta letra de identificacion!', 400
+        #if letraidentificacion == None:
+        #    return 'Falta letra de identificacion!', 400
         if indentificacion == None:
             return 'Falta numero de identificacion!', 400
         if name == None:
@@ -121,12 +121,12 @@ def handle_proveedor():
             return 'Falta la persona de Contacto!', 400
         if id_categoria == None:
             return 'Falta ID Categoria!', 400
-        if solvente == None:
-            return 'Falta la Solvencia!', 400
+        # if solvente == None:
+        #     return 'Falta la Solvencia!', 400
         if descripcion == None:
             return 'Falta la descripcion!', 400
         else:
-            new_row = Proveedores.new_proveedor(email, typeuser, letraidentificacion, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, solvente, descripcion)
+            new_row = Proveedores.new_proveedor(email, typeuser, indentificacion, name, direccion, region, photo, phone, password, personacontacto, id_categoria, descripcion)
             if new_row == None:
                 return 'Un error ha ocurrido!', 500
             else:
