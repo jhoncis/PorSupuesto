@@ -121,6 +121,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      ranking: async (calificacion) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            calificacion: calificacion,
+          }),
+        };
+      },
+
       getCategoria: async () => {
         try {
           // fetching data from the backend

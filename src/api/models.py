@@ -152,7 +152,7 @@ class Ranking(db.Model):
     #id_ranking = db.Column(db.Integer, (db.ForeignKey('proveedores.id')))
     id_usuario = db.Column(db.Integer, (db.ForeignKey('user.id')))
     #id_categoria = db.Column(db.Integer, (db.ForeignKey('categoria.id')))
-    calificacion = db.Column(db.Integer, unique=False, nullable = False)
+    calificacion = db.Column(db.Integer, unique=False, nullable = True)
     comentario = db.Column(db.String(300), unique=False, nullable=True)
     usuario = db.relationship("User")
 

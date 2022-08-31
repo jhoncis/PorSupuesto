@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment, useState, useContext  } from "react";
 import ReactStars from 'react-stars'
 import "../../styles/service.css";
 //import {useEffect, useState} from 'react';
@@ -7,12 +7,18 @@ import "../../styles/service.css";
 
 //import { render } from 'react-dom'
 
+export const Ranking = () => {
 
-
-export const Service = () => {
 	const ratingChanged = (newRating) => {
 		console.log(newRating)
 	}
+
+	const [ranking, setRanking] = useState({
+		calificacion: ""
+	  });
+
+
+
 	return(
 	<div className="contenedor px-4 py-4 vh-100">
 		<p className="text-center"></p>
@@ -36,8 +42,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
             					/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -64,8 +70,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -92,8 +98,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -122,8 +128,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -152,8 +158,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -180,8 +186,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -208,8 +214,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">
@@ -236,8 +242,8 @@ export const Service = () => {
 									onChange={ratingChanged}
 									size={24}
 									color2={'#ffd700'} 
-									edit={false}
-									value={3}
+									edit={true}
+									value= "calificacion"
 								/>
 							</div>
 							<div className="d-flex gap-2 pt-4">

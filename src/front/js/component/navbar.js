@@ -18,7 +18,7 @@ export const Navbar = () => {
                         <a className="nav-link active" href="/about">About</a>
                       </li>
                         <li className="nav-item mx-2">
-                        <a className="nav-link active" href="/service">Service</a>
+                        <a className="nav-link active" href="/ranking">Ranking</a>
                         </li>
 						<li className="nav-item mx-2">
                         <a className="nav-link active" href="/contact">Contact</a>
