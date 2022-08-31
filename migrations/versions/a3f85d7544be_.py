@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 44fc0d930e44
+Revision ID: a3f85d7544be
 Revises: 
-Create Date: 2022-08-30 00:33:38.658330
+Create Date: 2022-08-31 22:57:17.383375
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '44fc0d930e44'
+revision = 'a3f85d7544be'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,19 +22,16 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('descripcion_categoria', sa.String(length=300), nullable=False),
     sa.Column('descripcion_subcategoria', sa.String(length=300), nullable=False),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('descripcion_categoria'),
-    sa.UniqueConstraint('descripcion_subcategoria')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('email', sa.String(length=50), nullable=False),
+    sa.Column('email', sa.String(length=150), nullable=False),
     sa.Column('typeuser', sa.String(length=1), nullable=False),
-    sa.Column('letraidentificacion', sa.String(length=1), nullable=False),
     sa.Column('indentificacion', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=10), nullable=False),
+    sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('direccion', sa.String(length=120), nullable=False),
-    sa.Column('region', sa.String(length=10), nullable=False),
+    sa.Column('region', sa.String(length=100), nullable=False),
     sa.Column('photo', sa.String(length=1000), nullable=False),
     sa.Column('phone', sa.Integer(), nullable=False),
     sa.Column('password', sa.String(length=80), nullable=False),
@@ -49,19 +46,16 @@ def upgrade():
     sa.Column('id_usuario', sa.Integer(), nullable=True),
     sa.Column('personacontacto', sa.String(length=120), nullable=False),
     sa.Column('id_categoria', sa.Integer(), nullable=True),
-    sa.Column('solvente', sa.Boolean(), nullable=True),
     sa.Column('descripcion', sa.String(length=300), nullable=False),
     sa.ForeignKeyConstraint(['id_categoria'], ['categoria.id'], ),
     sa.ForeignKeyConstraint(['id_usuario'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('descripcion'),
-    sa.UniqueConstraint('personacontacto')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('ranking',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('id_usuario', sa.Integer(), nullable=True),
-    sa.Column('calificacion', sa.Integer(), nullable=False),
-    sa.Column('comentario', sa.String(length=300), nullable=False),
+    sa.Column('calificacion', sa.Integer(), nullable=True),
+    sa.Column('comentario', sa.String(length=300), nullable=True),
     sa.ForeignKeyConstraint(['id_usuario'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

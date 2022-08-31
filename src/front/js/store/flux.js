@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       usuario: null,
       rol: null,
+      proveedores: [],
       demo: [
         {
           title: "FIRST",
@@ -131,6 +132,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             calificacion: calificacion,
           }),
         };
+      },
+
+      getProveedores: async () => {
+        try {
+          // fetching data from the backend
+          const resp = await fetch(process.env.BACKEND_URL + "/api/proveedores");
+          const data = await resp.json();
+          console.log(data)
+          setStore({ proveedores: data });
+          // don't forget to return something, that is how the async resolves
+          return data;
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
 
       getCategoria: async () => {

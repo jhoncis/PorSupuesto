@@ -145,6 +145,7 @@ class Proveedores(User):
             #"id_categoria": self.id_categoria,
             #"solvente": self.solvente,
             "descripcion": self.descripcion,
+            "nombre": self.name
         }
         
 class Ranking(db.Model):
@@ -248,6 +249,7 @@ class Categoria(db.Model):
             "descripcion_categoria": self.descripcion_categoria,
             "descripcion_subcategoria": self.descripcion_subcategoria,
             "id_categoria": self.id
+            
         }
 
 
