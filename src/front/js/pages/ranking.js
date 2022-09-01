@@ -1,12 +1,21 @@
 import React, { Component, Fragment, useState, useContext } from "react";
 import ReactStars from "react-stars";
 import "../../styles/service.css";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+  Label,
+  Form,
+  FormGroup,
+} from 'reactstrap';
 //import { useEffect } from 'react';
 //import axios from "axios";
 
 import { Context } from "../store/appContext";
-
-//import { render } from 'react-dom'
 
 export const Ranking = () => {
   const { store, actions } = useContext(Context);
@@ -17,6 +26,14 @@ export const Ranking = () => {
   const [ranking, setRanking] = useState({
     calificacion: "",
   });
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+  const [unmountOnClose, setUnmountOnClose] = useState(true);
+  const changeUnmountOnClose = (e) => {
+    let { value } = e.target;
+    setUnmountOnClose(JSON.parse(value));
+  };
 
   return (
     <div className="contenedor px-4 py-4 vh-100">
@@ -47,7 +64,7 @@ export const Ranking = () => {
         </div>
       </div>
       <div>
-        <div className="row">
+        <div className="d-flex wrap">
           {store.proveedores.map((proveedor, index) => (
             <div className="col-xl-3 col-sm-6">
               <div className="card">
@@ -74,7 +91,7 @@ export const Ranking = () => {
                   <div className="mt-3 pt-1">
                     <p className="text-muted mb-0">
                       <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                      Siempre disponibles para todo lo que usted necesite!
+                      {proveedor.descripcion}
                     </p>
                     <ReactStars
                       count={5}
@@ -86,366 +103,50 @@ export const Ranking = () => {
                     />
                   </div>
                   <div className="d-flex gap-2 pt-4">
-                    <button
-                      type="button"
-                      className="btn btn-soft-primary btn-sm w-50"
-                    >
-                      <i className="bx bx-user me-1"></i> Perfil
-                    </button>
+                  <button
+                    type="button"
+                    className="btn btn-soft-primary btn-sm w-50"
+                  >
+                    <i className="bx bx-user me-1"></i> Perfil
+                  </button>
                     <button
                       type="button"
                       className="btn btn-primary btn-sm w-50"
+                      onClick={toggle}
                     >
-                      <i className="bx bx-message-square-dots me-1"></i>{" "}
-                      Contactoo
+                      <i className="bx bx-message-square-dots me-1">Calificar</i>{" "}
+                      <Modal isOpen={modal} toggle={toggle} unmountOnClose={unmountOnClose}>
+                        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                        <ModalBody>
+                          <Input
+                            type="textarea"
+                            placeholder="Write something (data should remain in modal if unmountOnClose is set to false)"
+                            rows={5}
+                          />
+                            <ReactStars
+                              count={5}
+                              onChange={ratingChanged}
+                              size={24}
+                              color2={"#ffd700"}
+                              edit={true}
+                              value="3.5"
+                            />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button color="primary" onClick={toggle}>
+                            Do Something
+                          </Button>{' '}
+                          <Button color="secondary" onClick={toggle}>
+                            Cancel
+                          </Button>
+                        </ModalFooter>
+                      </Modal>
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                      alt=""
-                      className="avatar-md rounded-circle img-thumbnail"
-                    />
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        ARG Servicios y Suministros
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-success mb-0">
-                      Oficina
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                      alt=""
-                      className="avatar-md rounded-circle img-thumbnail"
-                    />
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        Ferre Mundo SO, C.A
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-danger mb-0">
-                      Exteriores
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="2.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div className="avatar-md">
-                    <div className="avatar-title bg-soft-primary text-primary display-6 m-0 rounded-circle">
-                      <i className="bx bxs-user-circle"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        Global Prime Venezuela
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-danger mb-0">
-                      Oficina
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="4.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div className="avatar-md">
-                    <div className="avatar-title bg-soft-primary text-primary display-6 m-0 rounded-circle">
-                      <i className="bx bxs-user-circle"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        FERREMUNDIAL PROTO 2020 C.A
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-success mb-0">Hogar</span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="1.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                      alt=""
-                      className="avatar-md rounded-circle img-thumbnail"
-                    />
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        INVERSIONES REFITECA, C.A.
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-danger mb-0">
-                      Exteriores
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="3.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                      alt=""
-                      className="avatar-md rounded-circle img-thumbnail"
-                    />
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        EMICA MAYOR FERRETERO C.A.
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-danger mb-0">Hogar</span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="2.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-sm-6">
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                      alt=""
-                      className="avatar-md rounded-circle img-thumbnail"
-                    />
-                  </div>
-                  <div className="flex-1 ms-3">
-                    <h5 className="font-size-16 mb-1">
-                      <a href="#" className="text-dark">
-                        Ferreteria San Lorenzo
-                      </a>
-                    </h5>
-                    <span className="badge badge-soft-success mb-0">
-                      Oficina
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-1">
-                  <p className="text-muted mb-0">
-                    <i className="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>
-                    Siempre disponibles para todo lo que usted necesite!
-                  </p>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={"#ffd700"}
-                    edit={false}
-                    value="4.5"
-                  />
-                </div>
-                <div className="d-flex gap-2 pt-4">
-                  <button
-                    type="button"
-                    className="btn btn-soft-primary btn-sm w-50"
-                  >
-                    <i className="bx bx-user me-1"></i> Perfil
-                  </button>
-                  <button type="button" className="btn btn-primary btn-sm w-50">
-                    <i className="bx bx-message-square-dots me-1"></i> Contacto
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
