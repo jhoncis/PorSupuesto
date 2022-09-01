@@ -116,11 +116,11 @@ export const Ranking = () => {
                     >
                       <i className="bx bx-message-square-dots me-1">Calificar</i>{" "}
                       <Modal isOpen={modal} toggle={toggle} unmountOnClose={unmountOnClose}>
-                        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                        <ModalHeader toggle={toggle}>Dejanos  tu Calificacion!</ModalHeader>
                         <ModalBody>
                           <Input
                             type="textarea"
-                            placeholder="Write something (data should remain in modal if unmountOnClose is set to false)"
+                            placeholder="Cuentanos tu experiencia "
                             rows={5}
                           />
                             <ReactStars
@@ -134,10 +134,10 @@ export const Ranking = () => {
                         </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={toggle}>
-                            Do Something
+                            Calificar
                           </Button>{' '}
                           <Button color="secondary" onClick={toggle}>
-                            Cancel
+                            Cancelar
                           </Button>
                         </ModalFooter>
                       </Modal>
