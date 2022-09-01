@@ -191,11 +191,11 @@ export const About = () => {
 					</div>
 
 
-					</div>
-				</div>
-				</div>
-			
-				<div className="row">
+                </div>
+              </div>
+          	</div>
+		
+			<div className="row">
 
 					<div className="col-lg-3 col-md-6 col-12 pt-2">
 						<div className="card service-wrapper rounded border-0 shadow p-4">
@@ -215,23 +215,23 @@ export const About = () => {
 						</div>
 					</div>
 
-					<div className="col-lg-3 col-md-6 col-12  pt-2">
-						<div className="card service-wrapper rounded border-0 shadow p-4">
-							<div className="icon text-center text-custom h1 shadow rounded bg-white">
-								<span className="uim-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" className="uim-tertiary" rx="3"></rect><path className="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
-							</div>
-							<div className="content mt-4">
-								<h5 className="title">Calificar Clientes</h5>
-								<p className="text-muted mt-3 mb-0">Califica los clientes de la comunidad Porsupuesto</p>
-								<div className="mt-3">
-										<a href="javascript:void(0)" className="text-custom">Calificar <i className="mdi mdi-chevron-right"></i></a>
-								</div>
-							</div>
-							<div className="big-icon h1 text-custom">
-						<span className="uim-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" className="uim-tertiary" rx="3"></rect><path className="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
-					</div>
+				<div className="col-lg-3 col-md-6 col-12 npm pt-2">
+					<div className="card service-wrapper rounded border-0 shadow p-4">
+						<div className="icon text-center text-custom h1 shadow rounded bg-white">
+							<span className="uim-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" className="uim-tertiary" rx="3"></rect><path className="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
+                		</div>
+						<div className="content mt-4">
+                    		<h5 className="title">Calificar Clientes</h5>
+							<p className="text-muted mt-3 mb-0">Califica los clientes de la comunidad Porsupuesto</p>
+							<div className="mt-3">
+                        			<a href="javascript:void(0)" className="text-custom">Calificar <i className="mdi mdi-chevron-right"></i></a>
+                   			 </div>
 						</div>
+						<div className="big-icon h1 text-custom">
+                    <span className="uim-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em"><rect width="20" height="15" x="2" y="3" className="uim-tertiary" rx="3"></rect><path className="uim-primary" d="M16,21H8a.99992.99992,0,0,1-.832-1.55469l4-6a1.03785,1.03785,0,0,1,1.66406,0l4,6A.99992.99992,0,0,1,16,21Z"></path></svg></span>
+                </div>
 					</div>
+				</div>
 
 
 
