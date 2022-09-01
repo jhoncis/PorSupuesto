@@ -12,7 +12,7 @@ class User(db.Model):
     direccion = db.Column(db.String(120), unique=False,nullable=False)
     region = db.Column(db.String(100), unique=False,nullable=False)
     photo = db.Column(db.String(1000), unique=False,nullable=False)
-    phone = db.Column(db.Integer, unique=True,nullable=False)
+    phone = db.Column(db.Integer(), unique=True,nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean, unique=False, nullable=True)
 

@@ -25,13 +25,40 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
-      syncTokenFromSessionStore: () => {
+      syncTokenFromSessionStore: async () => {
         const store = getStore();
         const token = sessionStorage.getItem("token");
+        setStore({ token: token });
         console.log(
           "Aplication just loaded, synching the session storage token"
         );
-        //if(store.token && store.token!="" && store.token!=undefined) setStore({ token: token});
+        if (store.token && store.token != "" && store.token != undefined) {
+          const opts = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          };
+          try {
+            // fetching data from the backend
+            const resp = await fetch(
+              process.env.BACKEND_URL + "/api/token",
+              opts
+            );
+            const data = await resp.json();
+            console.log(data);
+            setStore({
+              usuario: data.user,
+              rol: data.rol,
+            });
+
+            // don't forget to return something, that is how the async resolves
+            return data;
+          } catch (error) {
+            console.log("Error loading message from backend", error);
+          }
+        }
       },
 
       logout: () => {
@@ -73,8 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("There has been an error login in");
         }
       },
-      
-      
+
       signup: async (user) => {
         console.log("User", user.categoria);
         const store = getStore();
@@ -89,7 +115,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           photo: user.photo,
           phone: user.phone,
           password: user.clave,
-          categoria : store.categorias.filter(x=>user.categoria==x.id_categoria),
+          categoria: store.categorias.filter(
+            (x) => user.categoria == x.id_categoria
+          ),
           id_categoria: user.categoria,
           personacontacto: user.personacontacto,
           descripcion: user.descripcion,
@@ -102,11 +130,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify(usuario),
         };
         try {
-          if (usuario.typeuser=="C"){
-            const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts);
-          }
-          else{
-            const resp = await fetch(process.env.BACKEND_URL + "/api/proveedores", opts);
+          if (usuario.typeuser == "C") {
+            const resp = await fetch(
+              process.env.BACKEND_URL + "/api/user",
+              opts
+            );
+          } else {
+            const resp = await fetch(
+              process.env.BACKEND_URL + "/api/proveedores",
+              opts
+            );
           }
           if (resp.status !== 200) {
             alert("There has been some error");
@@ -137,9 +170,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       getProveedores: async () => {
         try {
           // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/proveedores");
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/proveedores"
+          );
           const data = await resp.json();
-          console.log(data)
+          console.log(data);
           setStore({ proveedores: data });
           // don't forget to return something, that is how the async resolves
           return data;
@@ -153,7 +188,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           // fetching data from the backend
           const resp = await fetch(process.env.BACKEND_URL + "/api/categoria");
           const data = await resp.json();
-          console.log(data)
+          console.log(data);
           setStore({ categorias: data });
           // don't forget to return something, that is how the async resolves
           return data;
