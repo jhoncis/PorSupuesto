@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   FormGroup,
@@ -175,7 +176,7 @@ export const Contact = (props) => {
                     		<h5 className="title">Ranking Proveedores</h5>
 					          		<p className="text-muted mt-3 mb-0">Consulta el ranking de nuestros proveedores</p>
 							          <div className="mt-3">
-                        			<a href="javascript:void(0)" className="text-custom">Ranking <i className="mdi mdi-chevron-right"></i></a>
+                        			<a href="javascript:void(0)" className="text-custom"><Link to ="/ranking">Ranking</Link> <i className="mdi mdi-chevron-right"></i></a>
                    			 </div>
 					    	</div>
 					    	<div className="big-icon h1 text-custom">
