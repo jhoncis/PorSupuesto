@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       usuario: null,
       rol: null,
-      proveedores: [],
+      proveedores:[],
       demo: [
         {
           title: "FIRST",

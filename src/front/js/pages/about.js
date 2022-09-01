@@ -25,10 +25,10 @@ export const About = () => {
 					<div class="d-flex flex-column align-items-center text-center">
 						<img src="https://st2.depositphotos.com/1757583/11054/i/450/depositphotos_110546762-stock-photo-suppliers-3d-rendering-red-sticker.jpg" alt="Admin" className="rounded-circle" width="150"/>
 						<div className="mt-3">
-						<h4>Aserradero Esanos</h4>
-						<p className="text-secondary mb-1">Caracas</p>
-						<p className="text-muted font-size-sm">Av. principal de Boleíta</p>
-						<p className="text-muted font-size-sm">ejemplo@porsupuesto.com</p>
+						<h4>{store.usuario && store.usuario.name}</h4>
+						<p className="text-secondary mb-1">{store.usuario && store.usuario.region}</p>
+						<p className="text-muted font-size-sm">{store.usuario && store.usuario.direccion}</p>
+						<p className="text-muted font-size-sm">{store.usuario && store.usuario.email}</p>
 						</div>
 					</div>
 					</div>
@@ -49,7 +49,7 @@ export const About = () => {
 										className="form-control"
 										type="text"
 										name="nombre"
-										Value="Aserradero Esanos"
+										Value={store.usuario && store.usuario.name}
 										disabled="disabled"					
 									></Input>
 						</div>
@@ -66,7 +66,7 @@ export const About = () => {
 						placeholder="Ingrese nro. teléfono"
 						className="form-control"
 						type="text"
-			value="(239) 816-9029"
+			value={store.usuario && store.usuario.phone}
 						name="contacto"
 						disabled="disabled"	
 						></Input>
@@ -84,7 +84,7 @@ export const About = () => {
 								className="form-control"
 								type="text"
 								name="direccion"
-								value="Av. Principal de Boleíta Sur"
+								value={store.usuario && store.usuario.direccion}
 								disabled="disabled"	
 
 							></Input>
@@ -101,7 +101,7 @@ export const About = () => {
 							id="exampleSelect"
 							name="region"
 							type="select"
-					value="Distrito Capital"
+					value={store.usuario && store.usuario.region}
 					disabled="disabled"
 					>
 							<option>
