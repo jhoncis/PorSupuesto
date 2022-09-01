@@ -49,16 +49,16 @@ export const Loging = () => {
   };
 
   return (
-<div className="contenedorlogin px-4 py-4 vh-100">
+<div className="contenedorlogin px-3 py-3 vh-100 justify-content-sm-center d-flex align-items-center align-self-center">
 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-<div className="container bootstrap snippets bootdey">
-<div className="lc-block col-md-5 col-md-offset-5 toggled" id="l-login">
-  <div className="lcb-float"><i className="fa fa-users"></i></div>
+<div className="container bootstrap snippets bootdey d-flex justify-content-between ">
+<div className="lc-block col-md-5 col-md-offset-5 toggled mx-auto justify-content-sm-center " id="l-login">
+  <div className="lcb-float"><i className="fa fa-users justify-content-sm-center"></i></div>
     
-      <div className="modal-header">
+      <div className="modal-header justify-content-sm-center">
             <h1>Login</h1>
       </div>
 
@@ -90,8 +90,8 @@ export const Loging = () => {
              />
           </div>
           </form>
-          <div className="form-group">
-              <button className="btn btn-block btn-primary btn-float m-t-25" onClick={handleClick}>Sign In</button>
+          <div className="form-group d-flex justify-content-center">
+              <button className="btn btn-block btn-primary btn-float m-t-25 " onClick={handleClick}>Sign In</button>
           </div>
        
          
