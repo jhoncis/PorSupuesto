@@ -85,12 +85,8 @@ export const Signup = (props) => {
   };
 
   return (
-    <div className="contenedor px-4 py-4 vh-100">
-      <img
-        src="https://picsum.photos/id/1/367/267"
-        className="circular--square "
-        alt="..."
-      ></img>
+    <div className="contenedor px-4 py-4 vh-100 justify-content-sm-center d-flex align-items-center align-self-center">
+     
 
       <div className="w-50 p-3 style=background-color: #eee;">
         <Form className="row" onSubmit={enviarDatos}>
