@@ -12,7 +12,7 @@ import {
   Form,
   FormGroup,
 } from 'reactstrap';
-//import { useEffect } from 'react';
+import { useEffect } from 'react';
 //import axios from "axios";
 
 import { Context } from "../store/appContext";
@@ -26,6 +26,25 @@ export const Ranking = () => {
   const [ranking, setRanking] = useState({
     calificacion: "",
   });
+  const [busqueda, setBusqueda]= useState("");
+  const handleChange=e=>{
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  }
+  const filtrar=(terminoBusqueda)=>{
+    var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
+      if(elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      //|| elemento.company.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ){
+        return elemento;
+      }
+    });
+    setTablaUsuarios(resultadosBusqueda);
+  }
+  const [tablaUsuarios, setTablaUsuarios]= useState([]);
+  useEffect(()=>{
+    setTablaUsuarios(store.proveedores);
+    },[store.proveedores])
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -48,7 +67,9 @@ export const Ranking = () => {
                 <i className="fas fa-search h4 text-body"></i>
               </div>
               <div className="col">
-                <imput
+                <input
+                  value={busqueda}
+                  onChange={handleChange}
                   className="form-control form-control-lg form-control-borderless"
                   type="search"
                   placeholder="Buscar categoria"
@@ -65,7 +86,7 @@ export const Ranking = () => {
       </div>
       <div>
         <div className="d-flex wrap">
-          {store.proveedores.map((proveedor, index) => (
+          {tablaUsuarios && tablaUsuarios.map((proveedor, index) => (
             <div className="col-xl-3 col-sm-6">
               <div className="card">
                 <div className="card-body">
@@ -120,7 +141,7 @@ export const Ranking = () => {
                         <ModalBody>
                           <Input
                             type="textarea"
-                            placeholder="Cuentanos tu experiencia "
+                            placeholder="Cuentanos tu experienciagit  "
                             rows={5}
                           />
                             <ReactStars
