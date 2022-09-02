@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -19,13 +20,14 @@ import { Context } from "../store/appContext";
 export const Contact = (props) => {
   const { store, actions } = useContext(Context);
 
+  
   const [Imagen, setImagen] = useState("");
   const [Loading, setLoading] = useState(false);
   const upLoadImage = async (e) => {
-    const file = e.target.file;
+    const files = e.target.files;
     const data = new FormData();
-    data.append("files", file[0]);
-    data.append("upload_preset", "testimoniales");
+    data.append('file', files[0]);
+    data.append("upload_preset", "imagenes");
     setLoading(true);
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/porsupuesto/upload",
