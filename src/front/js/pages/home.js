@@ -10,7 +10,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
   
  	return (
-         <div className="py-4 vh-100">
+         <div className="">
            <div className="gira px-4 vh-90 px-4">
              <Carousel/>
              <h1 className="animate__animated animate__rotateIn" align="center">Porsupuesto</h1>

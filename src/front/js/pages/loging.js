@@ -1,5 +1,17 @@
 import React, { Component, useContext, useState } from "react";
-import { Button,FormGroup,Label,Input,FormText,Form,Col,Row, NavItem,Navbar,Modal } from 'reactstrap';
+import {
+  Button,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Form,
+  Col,
+  Row,
+  NavItem,
+  Navbar,
+  Modal,
+} from "reactstrap";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
@@ -15,13 +27,27 @@ export const Loging = () => {
 
   const token = sessionStorage.getItem("token");
   console.log("This is your token", store.token);
-  const handleClick =() => {
-    actions.loging(email,password)//.then(() =>{
-      //navigate("/");
-   //});
+  const handleClick = async () => {
+    await actions.loging(email, password); //.then(() =>{
+    //navigate("/");
+    //});
+    console.log("entra")
+    handRedirec();
   };
 
-  if(store.token && store.token!="" && store.token!=undefined)navigate("/");
+  if (store.token && store.token != "" && store.token != undefined)
+    navigate("/");
+
+  const handRedirec = () => {
+    console.log("usuario", store.usuario);
+    if (store.usuario) {
+      if (store.usuario.typeuser === "C") {
+        navigate("/contact", { replace: true });
+      } else {
+        navigate("/about", { replace: true });
+      }
+    }
+  };
 
   const handleLoging = () => {
     const opts = {
@@ -39,9 +65,10 @@ export const Loging = () => {
         if (resp.status === 200) return resp.json();
         else alert("There has been some error");
       })
-      .then(data => {
-        console.log("this came from the backend", data)
+      .then((data) => {
+        console.log("this came from the backend", data);
         sessionStorage.setItem("token", data.access_token);
+        handRedirec();
       })
       .catch((error) => {
         console.error("There was an error!!!!", error);
@@ -49,68 +76,63 @@ export const Loging = () => {
   };
 
   return (
-<div className="contenedorlogin px-3 py-3 vh-100 justify-content-sm-center d-flex align-items-center align-self-center">
+    <div className="contenedorlogin px-3 py-3 vh-100 justify-content-sm-center d-flex align-items-center align-self-center">
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
 
+      <div className="container bootstrap snippets bootdey d-flex justify-content-between ">
+        <div
+          className="lc-block col-md-5 col-md-offset-5 toggled mx-auto justify-content-sm-center "
+          id="l-login"
+        >
+          <div className="lcb-float">
+            <i className="fa fa-users justify-content-sm-center"></i>
+          </div>
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-
-<div className="container bootstrap snippets bootdey d-flex justify-content-between ">
-<div className="lc-block col-md-5 col-md-offset-5 toggled mx-auto justify-content-sm-center " id="l-login">
-  <div className="lcb-float"><i className="fa fa-users justify-content-sm-center"></i></div>
-    
-      <div className="modal-header justify-content-sm-center">
+          <div className="modal-header justify-content-sm-center">
             <h1>Login</h1>
-      </div>
-
-    
-      
-      {store.token && store.token!="" && store.token!=undefined? (
-        "You are logged in with this token" + store.token
-      ):(
-        <div className="modal-body">
-          <form class="form col-md-12 center-block">
-          <div className="form-group">
-             <input
-               className="form-control input-lg"
-               type="text"
-               placeholder="Correo electrónico"
-                autofocus="autofocus"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
           </div>
 
-          <div className="form-group">
-            <input
-               className="form-control input-lg"
-               type="password"
-                placeholder="Password"
-               value={password}
-               onChange={(e) => setPassword(e.target.value)}
-             />
-          </div>
-          </form>
-          <div className="form-group d-flex justify-content-center">
-              <button className="btn btn-block btn-primary btn-float m-t-25 " onClick={handleClick}>Sign In</button>
-          </div>
-       
-         
+          {store.token && store.token != "" && store.token != undefined ? (
+            "You are logged in with this token" + store.token
+          ) : (
+            <div className="modal-body">
+              <form class="form col-md-12 center-block">
+                <div className="form-group">
+                  <input
+                    className="form-control input-lg"
+                    type="text"
+                    placeholder="Correo electrónico"
+                    autofocus="autofocus"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <input
+                    className="form-control input-lg"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </form>
+              <div className="form-group d-flex justify-content-center">
+                <button
+                  className="btn btn-block btn-primary btn-float m-t-25 "
+                  onClick={handleClick}
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
-   
-    
-
-        )}
+      </div>
     </div>
-    </div>
-  
-
-
-
- 
-
-
-
-</div>
   );
 };

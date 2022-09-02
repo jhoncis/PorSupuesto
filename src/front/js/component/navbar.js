@@ -27,21 +27,21 @@ export const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item mx-2">
+            {!store.token &&(<><li className="nav-item mx-2">
               <a className="nav-link active" href="/about">
-                About
+                
               </a>
             </li>
             <li className="nav-item mx-2">
               <a className="nav-link active" href="/ranking">
-                Ranking
+                
               </a>
             </li>
             <li className="nav-item mx-2">
               <a className="nav-link active" href="/contact">
-                Contact
+                
               </a>
-            </li>
+            </li></>)}
             {!store.token && (
               <>
                 <li className="nav-item mx-2">
@@ -54,14 +54,14 @@ export const Navbar = () => {
                     Signup
                   </a>
                 </li>
+            <li className="nav-item mx-2">
+              <a className="nav-link active" href="/home">
+                
+              </a>
+            </li>
               </>
             )}
 
-            <li className="nav-item mx-2">
-              <a className="nav-link active" href="/home">
-                Home
-              </a>
-            </li>
           </ul>
           {store.usuario && store.usuario.name}
           {store.token && (
