@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState, useContext } from "react";
 import ReactStars from "react-stars";
 import "../../styles/service.css";
+
 import {
   Button,
   Modal,
@@ -149,7 +150,7 @@ export const Ranking = () => {
                         <ModalBody>
                           <Input
                             type="textarea"
-                            placeholder="Cuentanos tu experienciagit  "
+                            placeholder="Cuentanos tu experiencia"
                             rows={5}
                           />
                             <ReactStars
@@ -163,7 +164,7 @@ export const Ranking = () => {
                         </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={toggle}>
-                            Calificar
+                            Enviar
                           </Button>{' '}
                           <Button color="secondary" onClick={toggle}>
                             Cancelar

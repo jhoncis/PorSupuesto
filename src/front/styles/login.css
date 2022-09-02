@@ -10,7 +10,6 @@ body{margin-top:20px;}
 .modal-footer {   border-top: 0px; }
 
 body{
-    overflow: hidden;
     height: 100%;
     background: #191c22;
     padding: 0;
