@@ -37,7 +37,7 @@ export const Contact = (props) => {
   };
 
   return (
-    <div className="contenedor px-4 py-4 vh-100">
+    <div className="contenedor px-4 py-4 vh-90">
       <div className="container">
         <div className="main-body">
           <div className="row gutters-sm">
