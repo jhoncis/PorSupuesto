@@ -145,7 +145,8 @@ class Proveedores(User):
             #"id_categoria": self.id_categoria,
             #"solvente": self.solvente,
             "descripcion": self.descripcion,
-            "nombre": self.name
+            "nombre": self.name,
+            "categoria": self.categoria.serialize(),
         }
         
 class Ranking(db.Model):

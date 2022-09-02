@@ -29,16 +29,24 @@ export const Ranking = () => {
   const [busqueda, setBusqueda]= useState("");
   const handleChange=e=>{
     setBusqueda(e.target.value);
-    filtrar(e.target.value);
+    if(busqueda==" "){
+      setTablaUsuarios(store.proveedores)
+    }else{
+      filtrar(e.target.value); 
+    }
   }
   const filtrar=(terminoBusqueda)=>{
     var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
       if(elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-      //|| elemento.company.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      || elemento.categoria.descripcion_categoria.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       ){
         return elemento;
       }
     });
+    if(terminoBusqueda==""){
+      setTablaUsuarios(store.proveedores)
+      return
+    }
     setTablaUsuarios(resultadosBusqueda);
   }
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
@@ -105,7 +113,7 @@ export const Ranking = () => {
                         </a>
                       </h5>
                       <span className="badge badge-soft-success mb-0">
-                        Hogar
+                        {proveedor.categoria.descripcion_categoria}
                       </span>
                     </div>
                   </div>
